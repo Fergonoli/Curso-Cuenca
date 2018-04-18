@@ -20,7 +20,7 @@ public class Calculadora {
 	//Para los cuadros de dialogo
     JFrame frame = new JFrame("Circunferencia");
     
-	public void calculadora(String nombre)
+	public void calculadora(String nombre) throws InterruptedException
 	{	
 		
 		int salida = 0;				
@@ -49,7 +49,15 @@ public class Calculadora {
 		    											+ "14. Aleatorios\n"
 		    											+ "15. Cifras\n"
 		    											+ "16. Primos\n"
+		    											+ "17. Vocales\n"
+		    											+ "18. Reemplaza\n"
+		    											+ "19. Subcadena\n"
+		    											+ "20. Palabras\n"
+		    											+ "21. Numerologia\n"
+		    											+ "22. Cronometro\n"
 		    											
+		    											
+														+ "99. TiposJpanel\n"
 		    											);
 			
 			switch (opcion) 
@@ -134,6 +142,42 @@ public class Calculadora {
 	        		salida=1;
 	        		break;	        		
 	        		
+	        	case "Vocales": case "17": 
+	        		vocales(nombre);
+	        		salida=1;
+	        		break;	        		
+	        		
+	        	case "Reemplazar": case "18": 
+	        		reemplazar(nombre);
+	        		salida=1;
+	        		break;	
+
+	        	case "Subcadena": case "19": 
+	        		subcadena(nombre);
+	        		salida=1;
+	        		break;
+	        		
+	        	case "Palabras": case "20": 
+	        		palabras(nombre);
+	        		salida=1;
+	        		break;	        		
+
+	        	case "Numerologia": case "21": 
+	        		numerologia(nombre);
+	        		salida=1;
+	        		break;
+	        		
+	        	case "Cronometro": case "22": 
+	        		cronometro(nombre);
+	        		salida=1;
+	        		break;
+	        			        		
+
+	        		
+	        	case "TiposJpanel": case "99": 
+	        		jpanel(nombre);
+	        		salida=1;
+	        		break;
 	        		
 	        	default:  
 	        		JOptionPane.showMessageDialog(frame,"No entendi el comando ");
@@ -418,7 +462,8 @@ public class Calculadora {
 			
 		if(raiz < 0)
 		{
-			JOptionPane.showMessageDialog(frame,"No es posible, raiz de un negativo");
+		    JOptionPane.showMessageDialog(new JFrame(), "No es posible, raiz de un negativo", "Ecuacion de segundo grado",
+		            JOptionPane.ERROR_MESSAGE);
 		}
 		else
 		{
@@ -459,8 +504,8 @@ public class Calculadora {
                 break;	
                 
             default:
-            	
-            	JOptionPane.showMessageDialog(frame,nombre+" eso no es ni un dia");
+                JOptionPane.showMessageDialog(new JFrame(), nombre+" eso no es ni un dia", "Laborable o no",
+                        JOptionPane.ERROR_MESSAGE);
 		}		
 	}	
 	
@@ -544,17 +589,333 @@ public class Calculadora {
 		
 		if(primo>2)
 		{
-			JOptionPane.showMessageDialog(frame," No es primo");
+			JOptionPane.showMessageDialog(new JFrame(), " No es primo", "¿Es primo?",
+				        JOptionPane.ERROR_MESSAGE);
 		}
 		else
 		{
-			JOptionPane.showMessageDialog(frame," Es primo");
+			JOptionPane.showMessageDialog(new JFrame(), " Es primo", "¿Es primo?",
+			        JOptionPane.OK_OPTION);
 		}
 	}	
+
+	//Ver cuantas vocales tiene un string
+	public void vocales(String nombre)
+	{
+		JOptionPane.showMessageDialog(frame,nombre+" has elegido ver cuantas vocales tiene un string");
+		 
+		frame.setAlwaysOnTop( true );
 		
+		String frase = JOptionPane.showInputDialog(frame, "Dame tu frase:");
+		
+		int vocales=0;
+		
+		//Lo paso a minusculas para que no de problemas
+		frase = frase.toLowerCase();
+		
+		for(int i=0; i<frase.length(); i++)
+		{
+			if( (frase.charAt(i)=='a') ||
+				(frase.charAt(i)=='e') ||
+				(frase.charAt(i)=='i') ||
+				(frase.charAt(i)=='o') ||
+				(frase.charAt(i)=='u')  )
+			{
+				vocales++;
+			}
+			
+		}
+		
+		JOptionPane.showMessageDialog(frame,"Tienes: "+vocales+" vocales");
+	}	
+	
+	
+	//Ver cuantas vocales tiene un string
+	public void reemplazar(String nombre)
+	{
+		JOptionPane.showMessageDialog(frame,nombre+" has elegido reemplazar letras de un string");
+		 
+		frame.setAlwaysOnTop( true );
+		
+		String frase = JOptionPane.showInputDialog(frame, "Dame tu frase:");
+		
+		String letranueva = JOptionPane.showInputDialog(frame, "Dame tu cadena de reemplazo:");
+		
+		String letravieja = JOptionPane.showInputDialog(frame, "Dame tu cadena que quieres reemplazar:");
+		
+		//Hacer el replace
+		frase = frase.replaceAll(letravieja, letranueva);
+		
+		JOptionPane.showMessageDialog(frame,"Nueva frase: "+frase);
+	}	
+		
+
+	//Tomar parte de una cadena
+	public void subcadena(String nombre)
+	{
+		JOptionPane.showMessageDialog(frame,nombre+" has elegido seccionar una cadena de texto");
+		 
+		frame.setAlwaysOnTop( true );
+		
+		String frase;
+		
+		String inicio;
+		int inicionum;
+		
+		String fin;
+		int finnum;
+		
+		do
+		{
+			frase = JOptionPane.showInputDialog(frame, "Dame tu frase:");
+			
+			inicio = JOptionPane.showInputDialog(frame, "Dame posicion de inicio:");
+			inicionum = Integer.parseInt(inicio);
+			
+			fin = JOptionPane.showInputDialog(frame, "Dame posicion de fin:");
+			finnum = Integer.parseInt(fin);
+			
+			//Comprobar que el inicio y el fin son correctos
+			if(inicionum>finnum )
+			{
+				JOptionPane.showMessageDialog(new JFrame(), nombre+" posicion de inicio y fin mal introducidos", "Advertencia",
+				        JOptionPane.ERROR_MESSAGE);
+			}
+			
+			//Que la cadena no es demasiada corta
+			if(frase.length()<finnum) 
+			{
+				JOptionPane.showMessageDialog(new JFrame(), nombre+" longitud de la frase demasiado corta", "Advertencia",
+				        JOptionPane.ERROR_MESSAGE);
+			}			
+			
+		//Mientras que los datos de entrada no sean correctos no dejar finalizar el metodo	
+		}while( (inicionum>finnum) || (frase.length()<finnum) );
+			
+		//Hacer el substring
+		frase = frase.substring(inicionum, finnum);
+		
+		JOptionPane.showMessageDialog(frame,"Nueva frase: "+frase);
+	}		
+	
+
+	//Dividir las palabras de una frase
+	public void palabras(String nombre)
+	{
+		JOptionPane.showMessageDialog(frame,nombre+" has elegido dividir por palabras un texto");
+		 
+		frame.setAlwaysOnTop( true );
+		
+		//Frase que hay que separar
+		String frase;
+		frase = JOptionPane.showInputDialog(frame, "Dame tu frase:");
+			
+		
+		//Array donde se almacenaran las palabras
+		String palabras[];
+		
+		
+		//Separamos el texto por palabras y lo guardamos en el string
+		palabras = frase.split(" ");
+		
+		//El string resultado donde se almacenara el texto resultado
+		String result = "\n";
+		
+		//Recorremos el array y imprimimos palabra a palabra en nuevas lineas
+		for(int i=0; i<palabras.length; i++)
+		{
+			result = result + palabras[i] + "\n";
+		}
+		
+		JOptionPane.showMessageDialog(frame,"Las palabras son: "+result);
+	}		
+		
+	//Hacer un monton de operaciones
+	public void numerologia(String nombre)
+	{
+		JOptionPane.showMessageDialog(frame,nombre+" has elegido numerologia");
+		 
+		frame.setAlwaysOnTop( true );
+		
+		//Variables para todas las operaciones
+		double mayor= Double.NEGATIVE_INFINITY;
+		double menor= Double.POSITIVE_INFINITY;
+		double sumatotal=0;
+		double sumaposi=0;
+		double sumanega=0;
+		double media=0;
+		double numeros=0;
+		
+		String consola;
+		double consolanum;
+		
+		do
+		{
+			consola = JOptionPane.showInputDialog(frame, "Dame un numero (con el -1 acabara el metodo):");
+			
+			//Hacer el replace evita que si meten los numeros con , en vez de con punto entre igual
+			consola = consola.replace(",", ".");
+			
+			//Comprobar que es un numero correcto y no otra cosa o nada directamente
+			if(consola.matches("-?[0-9]+.?[0-9]*") && !consola.equals(""))
+			{
+				//Transformamos el string en un numero float
+				consolanum = Double.parseDouble(consola);
+	
+				//Si se introduce un -1 se rompe el juego
+				if(consolanum == -1)
+				{
+				    //Sale un cartel de advertencia con !
+				    JOptionPane.showMessageDialog(new JFrame(), "Introducido un -1, se termina de recoger numeros", "Numerologia",
+				            JOptionPane.CANCEL_OPTION);
+					
+					break;
+				}
+				
+				//Comprobacion de menor
+				if(consolanum<menor)
+				{
+					menor = consolanum;
+				}
+				
+				//Comprobacion de mayo
+				if(consolanum>mayor)
+				{
+					mayor = consolanum;
+				}			
+				
+				//Sumar todo
+				sumatotal = sumatotal+consolanum;
+				
+				//Suma de positivos
+				if(consolanum>0)
+				{
+					sumaposi = sumaposi + consolanum;
+				}
+				
+				//Suma de negativos
+				if(consolanum<0)
+				{
+					sumanega = sumanega + consolanum;
+				}
+				
+				//Contador de numeros
+				numeros++;	
+			}
+			else
+			{
+			    JOptionPane.showMessageDialog(new JFrame(), consola+" -- No es un numero", "Numerologia",
+			            JOptionPane.CANCEL_OPTION);
+			}
+				
+		}while(true);
+		
+		
+		//Calcular la media
+		media = sumatotal/numeros;
+		
+		//Truncar las sumas para que devuelvan solo 2 decimales
+		sumatotal=(double)((int)(sumatotal*100.0)/100.0); 
+		sumaposi=(double)((int)(sumaposi*100.0)/100.0); 
+		sumanega=(double)((int)(sumanega*100.0)/100.0); 
+		media=(double)((int)(media*100.0)/100.0); 
+		
+		
+		String result = "Resultado de numerologia: \n";
+		
+		result = result + "El menor numero: "+menor+"\n";
+		result = result + "El mayor numero: "+mayor+"\n";
+		result = result + "La suma de todos: "+sumatotal+"\n";
+		result = result + "La suma de positivos: "+sumaposi+"\n";
+		result = result + "La suma de negativos: "+sumanega+"\n";
+		result = result + "La media de todo: "+media+"\n";
+		
+		JOptionPane.showMessageDialog(frame,nombre+" el resultado es: \n"+result);	
+		
+	}	
+	
+	
+	
+	//Hacer un cronometro
+	@SuppressWarnings({ "static-access", "deprecation" })
+	public void cronometro(String nombre) throws InterruptedException
+	{
+		JOptionPane.showMessageDialog(frame,nombre+" has elegido cronometro");
+		
+		int horas=0;
+		int minutos=0;
+		int segundos=0;
+		
+		String tiempo= horas+":"+minutos+":"+segundos;
+		
+        ventanaCrono V = new ventanaCrono();      // creamos una ventana
+        V.setVisible(true);             // hacemos visible la ventana creada
+		
+		while(true)
+		{
+			segundos++;
+			
+			if(segundos==60)
+			{
+				segundos=0;
+				minutos++;
+				
+				if(minutos==60)
+				{
+					minutos=0;
+					horas++;
+					
+					if(horas == 24)
+					{
+						horas=0;
+					}
+				}
+			}
+			
+			tiempo = horas+":"+minutos+":"+segundos;
+			
+			V.texto.setText(tiempo);
+			
+			Thread.sleep(1000);
+		}
+	 
+	
+	}	
+
+	
+	
+	
+	
+    
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////
 	////           NUEVOS METODOS
+	
+	//Mostrar paneles
+	public void jpanel(String nombre)
+	{
+		//Sale un cartel de prohibido con x
+	    JOptionPane.showMessageDialog(new JFrame(), "ERROR_MESSAGE", "Dialog",
+	            JOptionPane.ERROR_MESSAGE);
+	    
+	    //Sale un cartel de advertencia con !
+	    JOptionPane.showMessageDialog(new JFrame(), "CANCEL_OPTION", "Dialog",
+	            JOptionPane.CANCEL_OPTION);
+	      
+	    //Sale un cartel informativo con un simbolo de i
+	    JOptionPane.showMessageDialog(new JFrame(), "INFORMATION_MESSAGE", "Dialog",
+	            JOptionPane.INFORMATION_MESSAGE);
+	    
+	    //Sale un cartel con una interrogacion ?
+	    JOptionPane.showMessageDialog(new JFrame(), "QUESTION_MESSAGE", "Dialog",
+	            JOptionPane.QUESTION_MESSAGE);	    
+	    
+	    //Sale plano sin nada
+	    JOptionPane.showMessageDialog(new JFrame(), "DEFAULT_OPTION", "Dialog",
+	            JOptionPane.DEFAULT_OPTION);	    
+	}	
+	
+	
 	
 	
 	

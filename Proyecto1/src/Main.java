@@ -7,7 +7,7 @@ import javax.swing.*;
 public class Main {
 	
 	
-	public static void main (String[]parametros)
+	public static void main (String[]parametros) throws InterruptedException
 	{
 		
 		//Lanzar metodo de bienvenida para login

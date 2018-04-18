@@ -9,7 +9,7 @@ public class Saludopersonal {
 	//Para los cuadros de dialogo
     JFrame frame = new JFrame("Saludo");
 	
-	public void saludo() {
+	public void saludo() throws InterruptedException {
 		
 		String nombre;
 	
