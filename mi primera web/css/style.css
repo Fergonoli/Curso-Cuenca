@@ -1,0 +1,132 @@
+
+/* Afecta a todo el html */
+*{
+
+}
+
+
+
+/* Afecta a las etiquetas p */
+p{ font-size: 40px}
+
+
+
+
+
+header{
+
+	text-align: center
+
+}
+
+
+nav{
+
+	text-align: center;
+
+}
+
+nav ul li{
+
+
+	display: inline;
+
+}
+
+/* efecto cuando pasas el raton por encima */
+nav ul li:hover{
+	background-color: green;
+}
+
+section{
+
+	/* al ponerle un porcentaje al ancho, reparte el ancho proporcionalmente al que apliques */
+	width: 70%
+}
+
+
+
+
+footer{
+
+	text-align: center;
+
+
+	/* Esto se puede utilizar para que las secciones no se mezquen y pase a una linea mas abajo al desplegarse*/
+	clear: both;
+}
+
+
+
+aside{	
+
+
+	/* para ponerle el fondo de un color a la seccion */
+	background-color: gray 
+
+}
+
+
+#parrafo1{
+
+	color: green;
+
+	/* lo encapsula en un cuadrado */
+	border: 10px solid #000000;
+
+	/* es el tamaño de encuadre de lo que contiene la tabla */
+	padding: 10px 10px 10px 10px 
+
+	/* El orden es Top, rigth, bottom, left */
+	/* Se mantienen las proporciones al agrandar o empequeñecer la ventana */
+	margin: 100px 100px 100px 100px
+}
+
+.imagen{
+
+	text-align: center
+
+}
+
+@font-face {  
+	font-family: 'mifuente'; 
+	src: url('../fuentes/mifuente.ttf'); 
+}
+
+/* darle un efecto de boton */
+.botonactivo{
+
+		border: 10px outset #000000;
+        font-size:20px;
+        font-family:mifuente;
+        font-weight:bold;
+        color:white;
+        background:#638cb5;
+
+        text-decoration: none;
+}
+
+
+/* para quitarle la tonalidad y el subrayado a los hipervinculos */
+.nounderline 
+{ 
+	text-decoration:none; 
+	color: white;
+} 
+
+
+
+/* distincion entre moviles y pcs */
+
+/*movil*/
+@media only screen and (max-width: 600px){
+
+	/* aqui se hace las fuentes para moviles */
+
+	section{
+
+		width: 100%
+
+	}
+
+}

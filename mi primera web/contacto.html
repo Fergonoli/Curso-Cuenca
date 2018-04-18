@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+	<!--  El meta para saber el lenguaje de la pagina que se utilizara para añadir las letras ñ etc para español 
+
+	Incluyen el titulo que aparecera a partir de las busquedas en google  
+
+	y la lista de keywords de la web -->
+
+	<meta charset="UTF-8"> 
+	<meta name="description" content="Ejemplo de HTML5"> 
+	<meta name="keywords" content="HTML5, CSS3, Javascript"> 
+
+	<title> Contacto </title>
+
+	<link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+
+<body>
+
+	<!--  cabecera -->
+	<header>
+		
+		<!--  Una etiqueta en la cabecera -->
+		<h1>  Pagina de contacto  </h1>
+
+
+	</header>
+
+
+	<!--  contenido debajo del header  -->
+	<nav>
+		
+		<ul>
+
+			<li class="botonactivo"><a href="index.html"  class="nounderline"> principal</a></li>    
+			<li class="botonactivo">fotos</li>     
+			<li class="botonactivo"><a href="contacto.html"  class="nounderline"> contacto</a></li>    
+
+	    </ul>
+	
+	</nav>
+
+	<!--  seccion lateral izquierdo -->
+	<section>
+		
+		
+		<!--  incluir una imagen puede llevar sus atributos de titulo y otras para el SEO -->
+		<img id=imagen src="imagenes/mundo.jpg">  
+
+
+		<!--  para saltar de linea y que los elementos no se junten  -->
+	    </br>
+
+		<!--  incluir un video en la web  -->
+		<video id="medio" width="720" height="400" preload controls loop poster="http://minkbooks.com/content/poster.jpg">   
+			<source src="videos/trailer.mp4">          
+	    </video>
+
+
+	</section>
+
+
+	<!-- lateral derecho -->
+	<aside>
+
+
+											<!-- con el metodo get se ven los datos, con el metodo post no se ven, -->
+											<!-- importante si es para contraseñas o esas cosas -->											
+    	<form name="miformulario" id="miformulario" method="post">      
+    		<input type="text" name="nombre" id="nombre" placeholder="nombre"> 
+    		<input type="email" name="email" id="email" placeholder="email" required>
+    		<textarea type="text" name="mensaje" id="mensaje"  placeholder="mensaje"></textarea>
+
+    		<input type="submit" value="Enviar">    
+
+    	</form> 
+	</aside>
+
+
+	<!--  cabecera final -->
+	<footer>
+
+	</footer>
+
+</body>
+</html>
+

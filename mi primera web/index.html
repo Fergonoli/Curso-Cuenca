@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+	<!--  El meta para saber el lenguaje de la pagina que se utilizara para añadir las letras ñ etc para español 
+
+	Incluyen el titulo que aparecera a partir de las busquedas en google  
+
+	y la lista de keywords de la web -->
+
+	<meta charset="UTF-8"> 
+	<meta name="description" content="Ejemplo de HTML5"> 
+	<meta name="keywords" content="HTML5, CSS3, Javascript"> 
+
+	<title> Mi primer gran ejemplo </title>
+
+	<link rel="stylesheet" href="css/style.css" >
+
+
+
+	<script src="funciones/formatJquery.js"></script>
+
+
+	<!--  Scripts para los estilos de datatable con Jquery -->
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>   
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> 
+
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet"/> 
+
+
+    <!-- Importante cargar las funciones de js propias, des  -->
+	<script src="funciones/funciones.js"></script>
+
+</head>
+
+
+<body>
+
+	<!--  cabecera -->
+	<header>
+		
+		<!--  Una etiqueta en la cabecera -->
+		<h1>  Hola mundo  </h1>
+
+	</header>
+
+
+	<!--  contenido debajo del header  -->
+	<nav>
+		
+		<ul>
+
+			<!--  text-decoration= "none" -->
+
+			<li class="botonactivo"><a href="index.html" class="nounderline">principal</a></li>  
+			<li class="botonactivo">fotos</li>     
+			<li class="botonactivo"><a href="contacto.html"  class="nounderline"> contacto</a></li>     
+
+	    </ul>
+	
+	</nav>
+
+	<!--  seccion lateral izquierdo -->
+	<section>
+		
+<div style="width: 100%"><iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&height=600&hl=es&q=Les%20Rambles%2C%201%20Barcelona%2C%20Spain+(Mi%20nombre%20de%20egocios)&ie=UTF8&t=&z=14&iwloc=B&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.mapsdirections.info/crear-un-mapa-de-google/">crear mapa Google Maps</a> by <a href="https://www.mapsdirections.info/">Mapa España</a></iframe></div><br />
+
+		<article>
+		
+		<!--  incluir una imagen puede llevar sus atributos de titulo y otras para el SEO -->
+		<img src="imagenes/mundo.jpg" >  
+
+		</article>
+
+			<h2> Esto es un parrafo </h2>
+
+			<!--  en esta etiqueta, al ponerle la id de parrafo1 lo asociamos al css de styles para que le aplique los
+			      cambios que se necesiten-->
+			<a id=parrafo1> Esto es un parrafo </a>
+
+			<h3> Esto es un parrafo </h3>
+		
+		</article>		
+      
+
+		<!--  Evento on click, cuando pulsas sobre el texto sale la ventana modal de hizo click -->
+		<p onclick="alert('hizo clic!')">Hacer Clic</p> 
+
+
+		<!--  Asi se llama a una funcion de un script, se identifica a la etiqueta con la clase del script y desde
+		      ese momento se pueden llamar a los metodos que incluye como en el caso el metodo lanzarMensaje()-->
+		<a onclick=lanzarMensaje()>Saludo</a>
+
+
+		<p onclick=muestra_texto()>Lo que parrafo1 contiene</p>
+
+
+		<br> <br>
+
+		<!--  Pequeño metodo para concatenar dos strings-->
+		<p id="nombre"> Fernando </p>
+		<p id="apellidos"> Gonzalez Oliver </p>
+
+
+		<p onclick=nombrecompleto()>Completar nombre</p>
+		<p onclick=mostrarcoches()>mostrar coches</p>		
+		<p onclick=mostrarPersonas()>mostrar personas</p>
+		<p onclick=contarAprobados()>mostrar notas</p>		
+		<p onclick=trabajoPersonas()>mostrar trabajadores</p>
+
+
+		<table id="example">
+			<thead>
+				<tr>
+					<th>
+						nombre
+					</th>
+					<th>
+						sueldo
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						Javier
+					</td>
+					<td>
+						3500
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+
+		<table id="ejemplo"></table>	
+
+
+
+
+<!---
+		<script>
+			
+			var dataSet = [
+    [ "Tiger Nixon", "System Architect", "Edinburgh", "5421", "2011/04/25", "$320,800" ],
+    [ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
+    [ "Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", "$86,000" ],
+    [ "Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", "$433,060" ],
+    [ "Airi Satou", "Accountant", "Tokyo", "5407", "2008/11/28", "$162,700" ],
+    [ "Brielle Williamson", "Integration Specialist", "New York", "4804", "2012/12/02", "$372,000" ],
+    [ "Herrod Chandler", "Sales Assistant", "San Francisco", "9608", "2012/08/06", "$137,500" ],
+    [ "Rhona Davidson", "Integration Specialist", "Tokyo", "6200", "2010/10/14", "$327,900" ],
+    [ "Colleen Hurst", "Javascript Developer", "San Francisco", "2360", "2009/09/15", "$205,500" ],
+    [ "Sonya Frost", "Software Engineer", "Edinburgh", "1667", "2008/12/13", "$103,600" ],
+    [ "Jena Gaines", "Office Manager", "London", "3814", "2008/12/19", "$90,560" ],
+    [ "Quinn Flynn", "Support Lead", "Edinburgh", "9497", "2013/03/03", "$342,000" ],
+    [ "Charde Marshall", "Regional Director", "San Francisco", "6741", "2008/10/16", "$470,600" ],
+    [ "Haley Kennedy", "Senior Marketing Designer", "London", "3597", "2012/12/18", "$313,500" ],
+    [ "Tatyana Fitzpatrick", "Regional Director", "London", "1965", "2010/03/17", "$385,750" ],
+    [ "Michael Silva", "Marketing Designer", "London", "1581", "2012/11/27", "$198,500" ],
+    [ "Paul Byrd", "Chief Financial Officer (CFO)", "New York", "3059", "2010/06/09", "$725,000" ],
+    [ "Gloria Little", "Systems Administrator", "New York", "1721", "2009/04/10", "$237,500" ],
+    [ "Bradley Greer", "Software Engineer", "London", "2558", "2012/10/13", "$132,000" ],
+    [ "Dai Rios", "Personnel Lead", "Edinburgh", "2290", "2012/09/26", "$217,500" ],
+    [ "Jenette Caldwell", "Development Lead", "New York", "1937", "2011/09/03", "$345,000" ],
+    [ "Yuri Berry", "Chief Marketing Officer (CMO)", "New York", "6154", "2009/06/25", "$675,000" ],
+    [ "Caesar Vance", "Pre-Sales Support", "New York", "8330", "2011/12/12", "$106,450" ],
+    [ "Doris Wilder", "Sales Assistant", "Sidney", "3023", "2010/09/20", "$85,600" ],
+    [ "Angelica Ramos", "Chief Executive Officer (CEO)", "London", "5797", "2009/10/09", "$1,200,000" ],
+    [ "Gavin Joyce", "Developer", "Edinburgh", "8822", "2010/12/22", "$92,575" ],
+    [ "Jennifer Chang", "Regional Director", "Singapore", "9239", "2010/11/14", "$357,650" ],
+    [ "Brenden Wagner", "Software Engineer", "San Francisco", "1314", "2011/06/07", "$206,850" ],
+    [ "Fiona Green", "Chief Operating Officer (COO)", "San Francisco", "2947", "2010/03/11", "$850,000" ],
+    [ "Shou Itou", "Regional Marketing", "Tokyo", "8899", "2011/08/14", "$163,000" ],
+    [ "Michelle House", "Integration Specialist", "Sidney", "2769", "2011/06/02", "$95,400" ],
+    [ "Suki Burks", "Developer", "London", "6832", "2009/10/22", "$114,500" ],
+    [ "Prescott Bartlett", "Technical Author", "London", "3606", "2011/05/07", "$145,000" ],
+    [ "Gavin Cortez", "Team Leader", "San Francisco", "2860", "2008/10/26", "$235,500" ],
+    [ "Martena Mccray", "Post-Sales support", "Edinburgh", "8240", "2011/03/09", "$324,050" ],
+    [ "Unity Butler", "Marketing Designer", "San Francisco", "5384", "2009/12/09", "$85,675" ]
+];
+ 
+$(document).ready(function() {
+    $('#ejemplo').DataTable( {
+        data: dataSet,
+        columns: [
+            { title: "Name" },
+            { title: "Position" },
+            { title: "Office" },
+            { title: "Extn." },
+            { title: "Start date" },
+            { title: "Salary" }
+        ]
+    } );
+} );
+
+
+		</script>
+-->
+
+		<a id="nombrecompleto"> </a>
+
+
+		<!--  Pequeño formulario para una calculadora simple-->
+		<p> Calculadora simple </p>
+    	<form name="calculadora" id="calculado" method="post">      
+    		<input type="number" name="sumando1" id="sumando1" placeholder="0"> 
+    		<input type="number" name="sumando2" id="sumando2" placeholder="0">
+
+    		<br>
+
+    		<br>
+    		<input type="button" value="+"  onclick=sumar() >    
+    		<input type="button" value="-"  onclick=restar()>  
+   			<input type="button" value="*"  onclick=multiplicar()>
+    		<input type="button" value="/"  onclick=dividir()>  
+    		<input type="button" value="^"  onclick=exp()>		  
+    		<input type="button" value="Par"  onclick=par()>	
+
+    		<br>
+
+    		<br>
+
+
+    		<input type="number" name="resultado" id="resultado" placeholder="resultado">
+
+   
+    		<input type="text" name="resto" id="resto" style=" visibility: hidden;"> 		
+
+
+    	</form> 
+
+
+
+
+
+
+
+
+
+
+	</section>
+
+
+	<!-- lateral derecho -->
+	<aside>
+		
+		   <blockquote>Mensaje número uno</blockquote>   
+		   <blockquote>Mensaje número dos</blockquote> 
+
+	</aside>
+
+
+	<!--  cabecera final -->
+	<footer>
+		
+		 Derechos Reservados &copy; 2010-2011
+
+
+		 				  <!--  el href es para lanzar enlaces a otras direcciones de la web o webs externas -->
+		 Desarrollado por <a href="http://www.desarrollo4app.com" target="_bla"> Desarrollo  </a>
+
+	</footer>
+
+ <!--
+	<element onload="	
+	//Codigo para aplicar el estilo de JQuery
+	$(document).ready(function() {
+	    $('#example').DataTable();
+	} );">
+ -->
+
+
+ <element onload=onload()>
+
+
+<script>
+  	//Codigo para aplicar el estilo de JQuery
+	$(document).ready(function() {
+	    $('#example').DataTable();
+	} );
+</script>
+
+
+</body>
+</html>
+
