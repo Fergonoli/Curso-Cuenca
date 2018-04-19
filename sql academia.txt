@@ -1,0 +1,123 @@
+create table
+
+Create Table alumno
+(
+	id INT(4) NOT NULL AUTO_INCREMENT,
+	nombre VARCHAR(25),
+	dni VARCHAR(25) NOT NULL UNIQUE,
+	fecha_nacimiento DATE,
+	KEY(id)
+);
+
+Create Table asignatura
+(
+	id INT(4) NOT NULL AUTO_INCREMENT,
+	nombre VARCHAR(25),
+	KEY(id)
+);
+
+Create Table matricula
+(
+	id INT(4) NOT NULL AUTO_INCREMENT,
+	id_alumno INT(4),
+	id_asignatura INT(4),
+	KEY(id),
+	FOREIGN KEY (id_alumno) REFERENCES alumno(id) ON DELETE CASCADE,
+	FOREIGN KEY (id_asignatura) REFERENCES asignatura(id)
+);
+
+Create Table calificaciones
+(
+	id INT(4) NOT NULL AUTO_INCREMENT,
+	id_matricula INT(4),
+	nota INT,
+	KEY(id),
+	FOREIGN KEY (id_matricula) REFERENCES matricula(id)
+);
+
+Create Table asistencias
+(
+	id INT(4) NOT NULL AUTO_INCREMENT,
+	id_matricula INT(4),
+	asistencia BOOLEAN,
+	fecha DATE,
+	KEY(id),
+	FOREIGN KEY (id_matricula) REFERENCES matricula(id)
+);
+
+Create Table usuario
+(
+	id INT(4) NOT NULL AUTO_INCREMENT,
+	username VARCHAR(25),
+	password VARCHAR(25),
+	tipo enum('alumno','profesor','administrador'),
+	KEY(id)
+);
+
+
+
+
+
+--INSERCCIONES
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('Luis', '123', 0);
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('Juan', '456', 1);
+
+
+
+
+--INSERCIONES EN ALUMNOS
+INSERT INTO `alumno`(`nombre`, `dni`, `fecha_nacimiento`) VALUES ('Luis', '8464645T', '1998-15-02');
+INSERT INTO `alumno`(`nombre`, `dni`, `fecha_nacimiento`) VALUES ('Juan', '3435454U', '1928-25-12');
+INSERT INTO `alumno`(`nombre`, `dni`, `fecha_nacimiento`) VALUES ('Luis', '4567688I', '1980-10-09');
+INSERT INTO `alumno`(`nombre`, `dni`, `fecha_nacimiento`) VALUES ('Ana', '3545466K', '1982-11-01');
+INSERT INTO `alumno`(`nombre`, `dni`, `fecha_nacimiento`) VALUES ('Maria', '3456789P', '1978-12-03');
+
+
+
+--INSERCIONES EN ASIGNATURAS
+INSERT INTO `asignatura`(`nombre`) VALUES ('Musica');
+INSERT INTO `asignatura`(`nombre`) VALUES ('Matematicas');
+INSERT INTO `asignatura`(`nombre`) VALUES ('Ingles');
+INSERT INTO `asignatura`(`nombre`) VALUES ('Lenguaje');
+INSERT INTO `asignatura`(`nombre`) VALUES ('Educacion Fisica');
+
+
+--INSERCIONES EN MATRICULAS
+INSERT INTO `matricula`(`id_asignatura`,`id_alumno`) VALUES ( (select a.id from alumno a where a.dni = '8464645T'), (select a.id from asignatura a where a.nombre = 'Musica'));
+INSERT INTO `matricula`(`id_asignatura`,`id_alumno`) VALUES ( (select a.id from alumno a where a.dni = '3545466K'), (select a.id from asignatura a where a.nombre = 'Lenguaje'));
+
+
+--INSERCIONES EN CALIFICACIONES
+INSERT INTO `calificaciones`(`id_matricula`,`nota`) VALUES ( (select m.id from alumno al, asignatura asi, matricula m where  al.dni = '8464645T' AND 
+																															 asi.nombre = 'Musica' AND 
+																															 m.id_asignatura = asi.id AND
+																															 m.id_alumno = al.id), 8);
+
+INSERT INTO `calificaciones`(`id_matricula`,`nota`) VALUES ( (select m.id from alumno al, asignatura asi, matricula m where  al.dni = '3545466K' AND 
+																															 asi.nombre = 'Lenguaje' AND 
+																															 m.id_asignatura = asi.id AND
+																															 m.id_alumno = al.id), 5);
+
+
+--INSERCIONES EN ASISTENCIAS 
+INSERT INTO `asistencias`(`id_matricula`,`fecha`,`asistencia`) VALUES ( (select m.id from alumno al, asignatura asi, matricula m where  al.dni = '3545466K' AND 
+																															 asi.nombre = 'Lenguaje' AND 
+																															 m.id_asignatura = asi.id AND
+																															 m.id_alumno = al.id), '2018-04-13', 1);
+
+INSERT INTO `asistencias`(`id_matricula`,`fecha`,`asistencia`) VALUES ( (select m.id from alumno al, asignatura asi, matricula m where  al.dni = '3545466K' AND 
+																															 asi.nombre = 'Lenguaje' AND 
+																															 m.id_asignatura = asi.id AND
+																															 m.id_alumno = al.id), '2018-04-14', 0);
+
+
+
+
+
+
+
+
+
+
+
+
