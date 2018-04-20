@@ -1,0 +1,55 @@
+@charset "ISO-8859-1";
+
+h1{ 
+
+	text-align: center;
+	color: #FF00FF;
+	padding: 30px 30px 0px 30px;
+	margin-bottom: 70px;
+}
+
+form{
+	
+	text-align: center;
+	padding: 30px;
+}
+
+
+body{
+	background: url("../imagenes/fondo.jpg");
+}
+
+
+nav{
+		
+	text-align: center;
+}
+
+/* darle un efecto de boton */
+.botonactivo{
+
+		border: 10px outset #000000;
+        font-size:20px;
+        font-family:mifuente;
+        font-weight:bold;
+        color:white;
+        background:#638cb5;
+
+        text-decoration: none;
+        
+}
+
+
+/* para quitarle la tonalidad y el subrayado a los hipervinculos */
+.nounderline 
+{ 
+	text-decoration:none; 
+	color: white;
+} 
+
+
+li{
+	width: 200px;
+    margin-left: 220px;
+    margin-top: 10px;
+}

@@ -2,7 +2,7 @@
     <wb-module deploy-name="miweb">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="miweb"/>
         <property name="java-output-path" value="/miweb/build/classes"/>
+        <property name="context-root" value="miweb/vista"/>
     </wb-module>
 </project-modules>

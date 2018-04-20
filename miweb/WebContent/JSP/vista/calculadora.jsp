@@ -18,7 +18,7 @@
 
 <h1>Calculadora</h1>
 
-<form action="resultado" method="post">
+<form action="resultado.jsp" method="post">
 
 		<input type="number" name="operandoIzq" id="operandoIzq" placeholder="Introduce numero" required>
 		<br>

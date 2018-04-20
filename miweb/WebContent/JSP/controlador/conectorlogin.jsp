@@ -10,6 +10,7 @@
 
 
   <%@ page import = "conectores.conector_usuario" %>
+  <%@ page import = "usuarios.usuario" %>
 
 	
   <%@ page import="java.util.*" %>
@@ -30,23 +31,62 @@
 	
 	conector_usuario conect = new conector_usuario();
 	
-	String passwordbbdd = conect.delvolverPass(nombre);
+	usuario user = conect.delvolverUsuario(nombre);
 	
-	//Comprobar si el usuario existe, mirando el resultado de password
-	
-	if(passwordteclado.equals(passwordbbdd))
-	{
-		//Darle acceso
-		JOptionPane.showMessageDialog(frame, "ACCESO PERMITIDO ");
+	if(user == null) {
 		
-		response.sendRedirect("../vista/calculadora.jsp");
-	}
-	else
-	{
 		//No darle acceso
 		JOptionPane.showMessageDialog(frame, "ACCESO DENEGADO ");
 		
 		response.sendRedirect("../vista/login.jsp");
+	}
+	else
+	{
+		
+		String passwordbbdd = user.getpassword();
+		
+		//Comprobar si el usuario existe, mirando el resultado de password
+		
+		if(passwordteclado.equals(passwordbbdd))
+		{
+			//Darle acceso
+			JOptionPane.showMessageDialog(frame, "ACCESO PERMITIDO ");
+			
+			String tipo = user.gettipo().toString();
+	
+			
+			//Datos de sesion
+            HttpSession sesion = request.getSession();  
+            sesion.setAttribute("username", user.getusername());
+            sesion.setAttribute("tipo", user.gettipo());
+                       
+			
+			if(tipo.equals("alumno"))
+			{
+				response.sendRedirect("../vista/saludoAlumno.jsp");
+			}
+			else
+			{
+				if(tipo.equals("profesor"))
+				{
+					response.sendRedirect("../vista/saludoProfesor.jsp");
+				}
+				else
+				{
+					if(tipo.equals("administrador"))
+					{
+						response.sendRedirect("../vista/saludoAdministrador.jsp");
+					}
+				}
+			}          
+		}
+		else
+		{
+			//No darle acceso
+			JOptionPane.showMessageDialog(frame, "ACCESO DENEGADO ");
+			
+			response.sendRedirect("../vista/login.jsp");
+		}
 	}
 	
 %>

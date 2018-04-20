@@ -22,12 +22,15 @@ public class conector_alumno {
 	 
 	public int insert(String nombre, String dni, String fecha_nacimiento) throws SQLException, ClassNotFoundException
 	{
+		  //Crear un objeto conector para obtener los datos de conexion
+		  conector_manager con = new conector_manager();
+		
 		  //Funciones para realizar la conexion con la BBDD
-		  Class.forName("com.mysql.jdbc.Driver");
+		  Class.forName(con.conexion);
 		  
 		  //En la url de getConnection, es importante quitarle el puerto, y direccionar a la BBDD correcta, 
 		  //con usuario root y sin contrseña
-		  Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/academia", "root", "");
+		  Connection conn = DriverManager.getConnection(con.url, con.user, con.pass);
 		  
 		  // Connection conn =
 		  //    DriverManager.getConnection("jdbc:odbc:eshopODBC");  // Access

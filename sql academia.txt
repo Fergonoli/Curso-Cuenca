@@ -1,13 +1,42 @@
 create table
 
+Create Table usuario
+(
+	id INT(4) NOT NULL AUTO_INCREMENT,
+	username VARCHAR(25) UNIQUE,
+	password VARCHAR(25),
+	tipo enum('alumno','profesor','administrador'),
+	KEY(id)
+);
+
 Create Table alumno
 (
 	id INT(4) NOT NULL AUTO_INCREMENT,
 	nombre VARCHAR(25),
+	apellido1 VARCHAR(25),
+	apellido2 VARCHAR(25),
+	telefono INT(9),
 	dni VARCHAR(25) NOT NULL UNIQUE,
 	fecha_nacimiento DATE,
-	KEY(id)
+	id_usuario INT(4),
+	KEY(id),
+	FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE
 );
+
+Create Table profesor
+(
+	id INT(4) NOT NULL AUTO_INCREMENT,
+	nombre VARCHAR(25),
+	apellido1 VARCHAR(25),
+	apellido2 VARCHAR(25),
+	telefono INT(9),
+	despacho VARCHAR(25),
+	especialidad DATE,
+	id_usuario INT(4),
+	KEY(id),
+	FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE
+);
+
 
 Create Table asignatura
 (
@@ -26,7 +55,7 @@ Create Table matricula
 	FOREIGN KEY (id_asignatura) REFERENCES asignatura(id)
 );
 
-Create Table calificaciones
+Create Table evaluaciones
 (
 	id INT(4) NOT NULL AUTO_INCREMENT,
 	id_matricula INT(4),
@@ -35,6 +64,123 @@ Create Table calificaciones
 	FOREIGN KEY (id_matricula) REFERENCES matricula(id)
 );
 
+
+
+
+--INSERCCIONES
+-- Administrador
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('Admin', '789', 3);
+
+-- Profesor
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('Pepe', '123', 2);
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('Juan', '123', 2);
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('Felipe', '123', 2);
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('Ana', '123', 2);
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('Marta', '123', 2);
+
+-- Alumno
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('Fer', '456', 1);
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('buitre', '456', 1);
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('Lopez', '456', 1);
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('Raulito', '456', 1);
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('Groudor', '456', 1);
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('Marlin', '456', 1);
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('urtado56', '456', 1);
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('gonxi', '456', 1);
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('sasdfk', '456', 1);
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('redi', '456', 1);
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('oni', '456', 1);
+INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('vampirito', '456', 1);
+
+
+
+--INSERCIONES EN ALUMNOS
+INSERT INTO `alumno`(`nombre`,`apellido1`,`apellido2`, `dni`, `fecha_nacimiento`,`telefono`,`id_usuario`) VALUES ('Luis','Garcia','Lupez', '8464645T', '1998-15-02', 674345678, 7);
+INSERT INTO `alumno`(`nombre`,`apellido1`,`apellido2`, `dni`, `fecha_nacimiento`,`telefono`,`id_usuario`) VALUES ('Alberto','Belmonte','Gutierrez', '2345645T', '1988-17-04', 63456456, 8);
+INSERT INTO `alumno`(`nombre`,`apellido1`,`apellido2`, `dni`, `fecha_nacimiento`,`telefono`,`id_usuario`) VALUES ('Sonia','Martinez','Jimenez', '7675434T', '2001-14-06', 669384705, 9);
+INSERT INTO `alumno`(`nombre`,`apellido1`,`apellido2`, `dni`, `fecha_nacimiento`,`telefono`,`id_usuario`) VALUES ('Veronica','Querida','Domingo', '3540950T', '2005-05-12', 689254596, 10);
+INSERT INTO `alumno`(`nombre`,`apellido1`,`apellido2`, `dni`, `fecha_nacimiento`,`telefono`,`id_usuario`) VALUES ('Alejandro','Garcia','Garcia', '4967665T', '2014-01-01', 662839457, 11);
+INSERT INTO `alumno`(`nombre`,`apellido1`,`apellido2`, `dni`, `fecha_nacimiento`,`telefono`,`id_usuario`) VALUES ('Felipe','Sanz','Dionisio', '45342345T', '1970-19-03', 656821000, 12);
+INSERT INTO `alumno`(`nombre`,`apellido1`,`apellido2`, `dni`, `fecha_nacimiento`,`telefono`,`id_usuario`) VALUES ('Andres','Garcia','Luna', '2343535T', '2013-16-03', 667902345, 13);
+INSERT INTO `alumno`(`nombre`,`apellido1`,`apellido2`, `dni`, `fecha_nacimiento`,`telefono`,`id_usuario`) VALUES ('Domingo','Fiesta','Segura', '6363445T', '2011-17-04', 657900023, 14);
+INSERT INTO `alumno`(`nombre`,`apellido1`,`apellido2`, `dni`, `fecha_nacimiento`,`telefono`,`id_usuario`) VALUES ('Pablo','Gonzalez','Uganda', '7653434T', '2010-18-05', 634565678, 15);
+INSERT INTO `alumno`(`nombre`,`apellido1`,`apellido2`, `dni`, `fecha_nacimiento`,`telefono`,`id_usuario`) VALUES ('Mamaru','Otto','Jackson5', '7456453T', '2010-19-06', 634546564, 16);
+INSERT INTO `alumno`(`nombre`,`apellido1`,`apellido2`, `dni`, `fecha_nacimiento`,`telefono`,`id_usuario`) VALUES ('Roberto','Toca','Mucho', '2343566T', '2012-10-07', 656787976, 17);
+INSERT INTO `alumno`(`nombre`,`apellido1`,`apellido2`, `dni`, `fecha_nacimiento`,`telefono`,`id_usuario`) VALUES ('Angustia','Dolor','Agudo', '5435234T', '1988-11-08', 611111111, 18);
+
+--INSERCIONES EN PROFESORES
+INSERT INTO `profesor`(`nombre`,`apellido1`,`apellido2`, `despacho`, `especialidad`,`telefono`,`id_usuario`) VALUES ('Alfredo','Aguado','Martinez', '3A', 'Matematicas', 655544567, 2);
+INSERT INTO `profesor`(`nombre`,`apellido1`,`apellido2`, `despacho`, `especialidad`,`telefono`,`id_usuario`) VALUES ('Carmen','Colon','America', '2A', 'Historia', 668792334, 3);
+INSERT INTO `profesor`(`nombre`,`apellido1`,`apellido2`, `despacho`, `especialidad`,`telefono`,`id_usuario`) VALUES ('Oviedo','Lopez','Sugar', '1A', 'Musica', 634646346, 4);
+INSERT INTO `profesor`(`nombre`,`apellido1`,`apellido2`, `despacho`, `especialidad`,`telefono`,`id_usuario`) VALUES ('Dante','Mato','Abel', '3B', 'Geografia', 676578643, 5);
+INSERT INTO `profesor`(`nombre`,`apellido1`,`apellido2`, `despacho`, `especialidad`,`telefono`,`id_usuario`) VALUES ('Almudena','Radiante','Mujer', '2B', 'Quimica', 623434567, 6);
+
+
+
+
+--INSERCIONES EN ASIGNATURAS
+INSERT INTO `asignatura`(`nombre`) VALUES ('Musica');
+INSERT INTO `asignatura`(`nombre`) VALUES ('Matematicas');
+INSERT INTO `asignatura`(`nombre`) VALUES ('Historia');
+INSERT INTO `asignatura`(`nombre`) VALUES ('Geografia');
+INSERT INTO `asignatura`(`nombre`) VALUES ('Quimica');
+
+
+--INSERCIONES EN MATRICULAS
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '8464645T'), (select a.id from asignatura a where a.nombre = 'Musica'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '8464645T'), (select a.id from asignatura a where a.nombre = 'Matematicas'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '8464645T'), (select a.id from asignatura a where a.nombre = 'Historia'));
+
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '2345645T'), (select a.id from asignatura a where a.nombre = 'Geografia'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '2345645T'), (select a.id from asignatura a where a.nombre = 'Quimica'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '2345645T'), (select a.id from asignatura a where a.nombre = 'Musica'));
+
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '7675434T'), (select a.id from asignatura a where a.nombre = 'Matematicas'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '7675434T'), (select a.id from asignatura a where a.nombre = 'Geografia'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '7675434T'), (select a.id from asignatura a where a.nombre = 'Historia'));
+
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '3540950T'), (select a.id from asignatura a where a.nombre = 'Quimica'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '3540950T'), (select a.id from asignatura a where a.nombre = 'Musica'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '3540950T'), (select a.id from asignatura a where a.nombre = 'Matematicas'));
+
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '4967665T'), (select a.id from asignatura a where a.nombre = 'Historia'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '4967665T'), (select a.id from asignatura a where a.nombre = 'Geografia'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '4967665T'), (select a.id from asignatura a where a.nombre = 'Quimica'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '4967665T'), (select a.id from asignatura a where a.nombre = 'Matematicas'));
+
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '45342345T'), (select a.id from asignatura a where a.nombre = 'Musica'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '45342345T'), (select a.id from asignatura a where a.nombre = 'Matematicas'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '45342345T'), (select a.id from asignatura a where a.nombre = 'Historia'));
+
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '2343535T'), (select a.id from asignatura a where a.nombre = 'Quimica'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '2343535T'), (select a.id from asignatura a where a.nombre = 'Geografia'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '2343535T'), (select a.id from asignatura a where a.nombre = 'Historia'));
+
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '6363445T'), (select a.id from asignatura a where a.nombre = 'Musica'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '6363445T'), (select a.id from asignatura a where a.nombre = 'Geografia'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '6363445T'), (select a.id from asignatura a where a.nombre = 'Historia'));
+
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '7653434T'), (select a.id from asignatura a where a.nombre = 'Quimica'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '7653434T'), (select a.id from asignatura a where a.nombre = 'Matematicas'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '7653434T'), (select a.id from asignatura a where a.nombre = 'Historia'));
+
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '7456453T'), (select a.id from asignatura a where a.nombre = 'Quimica'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '7456453T'), (select a.id from asignatura a where a.nombre = 'Geografia'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '7456453T'), (select a.id from asignatura a where a.nombre = 'Historia'));
+
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '2343566T'), (select a.id from asignatura a where a.nombre = 'Matematicas'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '2343566T'), (select a.id from asignatura a where a.nombre = 'Historia'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '2343566T'), (select a.id from asignatura a where a.nombre = 'Musica'));
+ 
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '5435234T'), (select a.id from asignatura a where a.nombre = 'Quimica'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '5435234T'), (select a.id from asignatura a where a.nombre = 'Matematicas'));
+INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from alumno a where a.dni = '5435234T'), (select a.id from asignatura a where a.nombre = 'Musica'));
+
+
+
+
+
+--  OBSOLETO
 Create Table asistencias
 (
 	id INT(4) NOT NULL AUTO_INCREMENT,
@@ -44,60 +190,6 @@ Create Table asistencias
 	KEY(id),
 	FOREIGN KEY (id_matricula) REFERENCES matricula(id)
 );
-
-Create Table usuario
-(
-	id INT(4) NOT NULL AUTO_INCREMENT,
-	username VARCHAR(25),
-	password VARCHAR(25),
-	tipo enum('alumno','profesor','administrador'),
-	KEY(id)
-);
-
-
-
-
-
---INSERCCIONES
-INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('Luis', '123', 0);
-INSERT INTO `usuario`(`username`, `password`, `tipo`) VALUES ('Juan', '456', 1);
-
-
-
-
---INSERCIONES EN ALUMNOS
-INSERT INTO `alumno`(`nombre`, `dni`, `fecha_nacimiento`) VALUES ('Luis', '8464645T', '1998-15-02');
-INSERT INTO `alumno`(`nombre`, `dni`, `fecha_nacimiento`) VALUES ('Juan', '3435454U', '1928-25-12');
-INSERT INTO `alumno`(`nombre`, `dni`, `fecha_nacimiento`) VALUES ('Luis', '4567688I', '1980-10-09');
-INSERT INTO `alumno`(`nombre`, `dni`, `fecha_nacimiento`) VALUES ('Ana', '3545466K', '1982-11-01');
-INSERT INTO `alumno`(`nombre`, `dni`, `fecha_nacimiento`) VALUES ('Maria', '3456789P', '1978-12-03');
-
-
-
---INSERCIONES EN ASIGNATURAS
-INSERT INTO `asignatura`(`nombre`) VALUES ('Musica');
-INSERT INTO `asignatura`(`nombre`) VALUES ('Matematicas');
-INSERT INTO `asignatura`(`nombre`) VALUES ('Ingles');
-INSERT INTO `asignatura`(`nombre`) VALUES ('Lenguaje');
-INSERT INTO `asignatura`(`nombre`) VALUES ('Educacion Fisica');
-
-
---INSERCIONES EN MATRICULAS
-INSERT INTO `matricula`(`id_asignatura`,`id_alumno`) VALUES ( (select a.id from alumno a where a.dni = '8464645T'), (select a.id from asignatura a where a.nombre = 'Musica'));
-INSERT INTO `matricula`(`id_asignatura`,`id_alumno`) VALUES ( (select a.id from alumno a where a.dni = '3545466K'), (select a.id from asignatura a where a.nombre = 'Lenguaje'));
-
-
---INSERCIONES EN CALIFICACIONES
-INSERT INTO `calificaciones`(`id_matricula`,`nota`) VALUES ( (select m.id from alumno al, asignatura asi, matricula m where  al.dni = '8464645T' AND 
-																															 asi.nombre = 'Musica' AND 
-																															 m.id_asignatura = asi.id AND
-																															 m.id_alumno = al.id), 8);
-
-INSERT INTO `calificaciones`(`id_matricula`,`nota`) VALUES ( (select m.id from alumno al, asignatura asi, matricula m where  al.dni = '3545466K' AND 
-																															 asi.nombre = 'Lenguaje' AND 
-																															 m.id_asignatura = asi.id AND
-																															 m.id_alumno = al.id), 5);
-
 
 --INSERCIONES EN ASISTENCIAS 
 INSERT INTO `asistencias`(`id_matricula`,`fecha`,`asistencia`) VALUES ( (select m.id from alumno al, asignatura asi, matricula m where  al.dni = '3545466K' AND 
@@ -113,10 +205,16 @@ INSERT INTO `asistencias`(`id_matricula`,`fecha`,`asistencia`) VALUES ( (select 
 
 
 
+--INSERCIONES EN CALIFICACIONES
+INSERT INTO `evaluaciones`(`id_matricula`,`nota`) VALUES ( (select m.id from alumno al, asignatura asi, matricula m where  al.dni = '8464645T' AND 
+																															 asi.nombre = 'Musica' AND 
+																															 m.id_asignatura = asi.id AND
+																															 m.id_alumno = al.id), 8);
 
-
-
-
+INSERT INTO `evaluaciones`(`id_matricula`,`nota`) VALUES ( (select m.id from alumno al, asignatura asi, matricula m where  al.dni = '3545466K' AND 
+																															 asi.nombre = 'Lenguaje' AND 
+																															 m.id_asignatura = asi.id AND
+																															 m.id_alumno = al.id), 5);
 
 
 

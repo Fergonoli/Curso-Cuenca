@@ -5,8 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/estilo.css"/>
 </head>
 <body>
+
+		<h1>  Login  </h1>
 
 
 <form action="../controlador/conectorlogin.jsp" method="post">
@@ -30,4 +33,8 @@
 
 
 </body>
+
+
+
+
 </html>

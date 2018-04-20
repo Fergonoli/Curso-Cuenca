@@ -1,0 +1,21 @@
+@charset "ISO-8859-1";
+
+
+h1{ 
+
+	text-align: center;
+	color: #FF00FF;
+	padding: 30px 30px 0px 30px;
+
+}
+
+form{
+	
+	text-align: center;
+	padding: 30px;
+}
+
+
+body{
+	background: url("../imagenes/fondo.jpg");
+}
