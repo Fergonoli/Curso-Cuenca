@@ -179,6 +179,16 @@ INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from 
 
 
 
+-- Funciones select complejas
+
+
+
+
+
+
+
+
+
 
 --  OBSOLETO
 Create Table asistencias

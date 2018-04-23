@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+ <%@ page import = "conectores.url_manager" %>
+ 
+ <%  
+ 	//Creamos un objeto url_manager que contiene las urls de todos los elementos necesarios, vista, controlador, css y clases
+ 	url_manager url = new url_manager();
+ 
+ %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -62,19 +71,19 @@
 			
 			if(tipo.equals("alumno"))
 			{
-				response.sendRedirect("../vista/inicioalumno.jsp");
+				response.sendRedirect(url.vista+"inicioalumno.jsp");
 			}
 			else
 			{
 				if(tipo.equals("profesor"))
 				{
-					response.sendRedirect("../vista/saludoProfesor.jsp");
+					response.sendRedirect(url.vista+"saludoProfesor.jsp");
 				}
 				else
 				{
 					if(tipo.equals("administrador"))
 					{
-						response.sendRedirect("../vista/saludoAdministrador.jsp");
+						response.sendRedirect(url.vista+"saludoAdministrador.jsp");
 					}
 				}
 			}          
@@ -84,7 +93,7 @@
 			//No darle acceso
 			JOptionPane.showMessageDialog(frame, "ACCESO DENEGADO ");
 			
-			response.sendRedirect("../vista/login.jsp");
+			response.sendRedirect(url.vista+"login.jsp");
 		}
 	}
 	
