@@ -12,8 +12,149 @@ public class conector_usuario {
 	private String password;
 	
 
-	public void imprimir(){
-		System.out.println("Entro ");
+	public boolean comprobarusername(String username) throws SQLException, ClassNotFoundException {
+		
+		//Crear un objeto conector para obtener los datos de conexion
+		conector_manager con = new conector_manager();
+		
+		//Funciones para realizar la conexion con la BBDD
+		Class.forName(con.conexion);
+		  
+		//En la url de getConnection, es importante quitarle el puerto, y direccionar a la BBDD correcta, 
+		//con usuario root y sin contrseña
+		Connection conn = DriverManager.getConnection(con.url, con.user, con.pass);
+		  
+		// Connection conn =
+		//    DriverManager.getConnection("jdbc:odbc:eshopODBC");  // Access
+		      
+		//Con esta instruccion realizamos la conexion con la BBDD
+		Statement stmt = conn.createStatement();		      
+		      
+		//En una variable String almacenamos la instruccion SQL que queremos lanzar
+		String sqlStr = "SELECT * FROM usuario WHERE usuario.username='"+username+"'";
+
+		// Se puede quitar
+		System.out.println("Query statement is " + sqlStr);
+		      
+		//Con esta funcion ejecutamos la Instruccion SQL creada arriba
+		ResultSet rset = stmt.executeQuery(sqlStr);		
+		
+		//Comprobar que se devolvio algo
+		if (!rset.first()) {
+			  
+			return true;		  
+		}	
+		
+		return false;
+	}	
+	
+	
+	public boolean comprobarpassword(String username, String pass) throws SQLException, ClassNotFoundException {
+		
+		//Crear un objeto conector para obtener los datos de conexion
+		conector_manager con = new conector_manager();
+		
+		//Funciones para realizar la conexion con la BBDD
+		Class.forName(con.conexion);
+		  
+		//En la url de getConnection, es importante quitarle el puerto, y direccionar a la BBDD correcta, 
+		//con usuario root y sin contrseña
+		Connection conn = DriverManager.getConnection(con.url, con.user, con.pass);
+		  
+		// Connection conn =
+		//    DriverManager.getConnection("jdbc:odbc:eshopODBC");  // Access
+		      
+		//Con esta instruccion realizamos la conexion con la BBDD
+		Statement stmt = conn.createStatement();		      
+		      
+		//En una variable String almacenamos la instruccion SQL que queremos lanzar
+		String sqlStr = "SELECT * FROM usuario WHERE usuario.username='"+username+"' AND usuario.password='"+pass+"'";
+
+		// Se puede quitar
+		System.out.println("Query statement is " + sqlStr);
+		      
+		//Con esta funcion ejecutamos la Instruccion SQL creada arriba
+		ResultSet rset = stmt.executeQuery(sqlStr);		
+		
+		//Comprobar que se devolvio algo
+		if (!rset.first()) {
+			  
+			return true;		  
+		}	
+		
+		return false;
+	}
+	
+	public void updateusername(String lastuser, String newuser) throws SQLException, ClassNotFoundException {
+		
+		//Crear un objeto conector para obtener los datos de conexion
+		conector_manager con = new conector_manager();
+		
+		//Funciones para realizar la conexion con la BBDD
+		Class.forName(con.conexion);
+		  
+		//En la url de getConnection, es importante quitarle el puerto, y direccionar a la BBDD correcta, 
+		//con usuario root y sin contrseña
+		Connection conn = DriverManager.getConnection(con.url, con.user, con.pass);
+		  
+		// Connection conn =
+		//    DriverManager.getConnection("jdbc:odbc:eshopODBC");  // Access
+		      
+		//Con esta instruccion realizamos la conexion con la BBDD
+		Statement stmt = conn.createStatement();		      
+		      
+		//En una variable String almacenamos la instruccion SQL que queremos lanzar
+		String sqlStr = "UPDATE usuario SET "
+						+ "usuario.username="+newuser+""
+								+ "WHERE usuario.username ="+lastuser+"";
+
+		// Se puede quitar
+		System.out.println("Query statement is " + sqlStr);
+		      
+		//Con esta funcion ejecutamos la Instruccion SQL creada arriba
+		stmt.executeUpdate(sqlStr);			
+		
+		//Por ultimo es importante cerrar el conector, la consulta y todo.
+		stmt.close();
+		conn.close();
+		
+	}
+	
+	
+	
+	public void updatepassword(String pass, String user) throws SQLException, ClassNotFoundException {
+		
+		//Crear un objeto conector para obtener los datos de conexion
+		conector_manager con = new conector_manager();
+		
+		//Funciones para realizar la conexion con la BBDD
+		Class.forName(con.conexion);
+		  
+		//En la url de getConnection, es importante quitarle el puerto, y direccionar a la BBDD correcta, 
+		//con usuario root y sin contrseña
+		Connection conn = DriverManager.getConnection(con.url, con.user, con.pass);
+		  
+		// Connection conn =
+		//    DriverManager.getConnection("jdbc:odbc:eshopODBC");  // Access
+		      
+		//Con esta instruccion realizamos la conexion con la BBDD
+		Statement stmt = conn.createStatement();		      
+		      
+		//En una variable String almacenamos la instruccion SQL que queremos lanzar
+		String sqlStr = "UPDATE usuario SET "
+						+ "usuario.password="+pass+""
+								+ "WHERE usuario.username ="+user+"";
+
+		// Se puede quitar
+		System.out.println("Query statement is " + sqlStr);
+		      
+		//Con esta funcion ejecutamos la Instruccion SQL creada arriba
+		stmt.executeUpdate(sqlStr);			
+		
+		//Por ultimo es importante cerrar el conector, la consulta y todo.
+		stmt.close();
+		conn.close();
+		
 	}
 	
 	

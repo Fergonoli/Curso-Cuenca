@@ -20,7 +20,7 @@
 		<h1>  Login  </h1>
 
 
-<form action="<%=url.controlador%>conectorlogin.jsp" method="post">
+<form action="<%=url.controlador%>controladorlogin.jsp" method="post">
 
 	<input type="text" name="nombre" id="nombre" placeholder="Introduce usuario" required>
 	

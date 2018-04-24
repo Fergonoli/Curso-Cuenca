@@ -31,7 +31,7 @@ Create Table profesor
 	apellido2 VARCHAR(25),
 	telefono INT(9),
 	despacho VARCHAR(25),
-	especialidad DATE,
+	especialidad VARCHAR(25),
 	id_usuario INT(4),
 	KEY(id),
 	FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE
@@ -42,7 +42,9 @@ Create Table asignatura
 (
 	id INT(4) NOT NULL AUTO_INCREMENT,
 	nombre VARCHAR(25),
-	KEY(id)
+	id_profesor INT(4),
+	KEY(id),
+	FOREIGN KEY (id_profesor) REFERENCES profesor(id) 
 );
 
 Create Table matricula
@@ -59,9 +61,11 @@ Create Table evaluaciones
 (
 	id INT(4) NOT NULL AUTO_INCREMENT,
 	id_matricula INT(4),
+	id_profesor INT(4),
 	nota INT,
 	KEY(id),
-	FOREIGN KEY (id_matricula) REFERENCES matricula(id)
+	FOREIGN KEY (id_matricula) REFERENCES matricula(id),
+	FOREIGN KEY (id_profesor) REFERENCES profesor(id)
 );
 
 
@@ -119,11 +123,11 @@ INSERT INTO `profesor`(`nombre`,`apellido1`,`apellido2`, `despacho`, `especialid
 
 
 --INSERCIONES EN ASIGNATURAS
-INSERT INTO `asignatura`(`nombre`) VALUES ('Musica');
-INSERT INTO `asignatura`(`nombre`) VALUES ('Matematicas');
-INSERT INTO `asignatura`(`nombre`) VALUES ('Historia');
-INSERT INTO `asignatura`(`nombre`) VALUES ('Geografia');
-INSERT INTO `asignatura`(`nombre`) VALUES ('Quimica');
+INSERT INTO `asignatura`(`nombre`) VALUES ('Musica',3);
+INSERT INTO `asignatura`(`nombre`) VALUES ('Matematicas',1);
+INSERT INTO `asignatura`(`nombre`) VALUES ('Historia',2);
+INSERT INTO `asignatura`(`nombre`) VALUES ('Geografia',4);
+INSERT INTO `asignatura`(`nombre`) VALUES ('Quimica',5);
 
 
 --INSERCIONES EN MATRICULAS
@@ -180,12 +184,12 @@ INSERT INTO `matricula`(`id_alumno`,`id_asignatura`) VALUES ( (select a.id from 
 
 
 -- Funciones select complejas
-
-
-
-
-
-
+SELECT asignatura.nombre, evaluaciones.nota 
+FROM asignatura LEFT jOIN matricula ON matricula.id_asignatura = asignatura.id 
+                LEFT JOIN evaluaciones ON evaluaciones.id_matricula = matricula.id 
+                LEFT jOIN alumno ON alumno.id = matricula.id_alumno 
+                LEFT jOIN usuario ON usuario.id = alumno.id_usuario
+WHERE usuario.username = 'Fer'
 
 
 
@@ -229,3 +233,64 @@ INSERT INTO `evaluaciones`(`id_matricula`,`nota`) VALUES ( (select m.id from alu
 
 
 
+-- SELECT COMPLEJOS
+SELECT u.id FROM usuario u WHERE u.username='Pepe'
+
+SELECT prof.nombre, prof.telefono 
+FROM usuario u, profesor prof 
+WHERE u.username='Pepe' AND
+      u.id = prof.id_usuario
+
+
+SELECT asi.nombre, asi.id 
+FROM usuario u, profesor prof, asignatura asi
+WHERE u.username='Pepe' AND
+      u.id = prof.id_usuario AND
+      prof.id = asi.id_profesor
+
+
+SELECT mat.id, mat.id_alumno
+FROM usuario u, profesor prof, asignatura asi, matricula mat
+WHERE u.username='Pepe' AND
+      u.id = prof.id_usuario AND
+      prof.id = asi.id_profesor AND
+      asi.id = mat.id_asignatura
+
+
+
+SELECT alu.id, alu.nombre, alu.apellido1, alu.apellido2, alu.dni
+FROM usuario u, profesor prof, asignatura asi, matricula mat, alumno alu
+WHERE u.username='Pepe' AND
+      u.id = prof.id_usuario AND
+      prof.id = asi.id_profesor AND
+      asi.id = mat.id_asignatura AND 
+      mat.id_alumno = alu.id
+
+
+
+-- funcionaaaaaaaaaaa
+select A.*, B.*
+from (SELECT alu.id, alu.nombre, alu.apellido1, alu.apellido2, alu.dni, mat.id as matri
+FROM usuario u, profesor prof, asignatura asi, matricula mat, alumno alu 
+WHERE u.username='Pepe' AND
+      u.id = prof.id_usuario AND
+      prof.id = asi.id_profesor AND
+      asi.id = mat.id_asignatura AND 
+      mat.id_alumno = alu.id)  as A left join
+(SELECT eva.nota, eva.id_matricula as evalu
+FROM usuario u, profesor prof, asignatura asi, matricula mat, alumno alu, evaluaciones eva
+WHERE u.username='Pepe' AND
+      u.id = prof.id_usuario AND
+      prof.id = asi.id_profesor AND
+      asi.id = mat.id_asignatura AND 
+      mat.id_alumno = alu.id AND
+      mat.id = eva.id_matricula) as B
+on A.matri = B.evalu;
+
+SELECT * FROM alumno al, matricula mat, evaluaciones eva, profesor prof, usuario usu
+WHERE al.dni = '7675434T' AND 
+	   al.id = mat.id_alumno AND 
+	   usu.username = 'Pepe' AND 
+	   usu.id = prof.id_usuario AND 
+	   mat.id = eva.id_matricula AND 
+	   eva.id_profesor = prof.id

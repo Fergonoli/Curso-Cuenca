@@ -48,7 +48,7 @@
 		//No darle acceso
 		JOptionPane.showMessageDialog(frame, "ACCESO DENEGADO ");
 		
-		response.sendRedirect("../vista/login.jsp");
+		response.sendRedirect(url.vista+"index.jsp");
 	}
 	else
 	{
@@ -77,7 +77,7 @@
 			{
 				if(tipo.equals("profesor"))
 				{
-					response.sendRedirect(url.vista+"saludoProfesor.jsp");
+					response.sendRedirect(url.vista+"inicioprofesor.jsp");
 				}
 				else
 				{
