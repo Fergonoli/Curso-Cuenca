@@ -2,10 +2,9 @@ package academia;
 
 public class profesor extends usuario {
 
-	String especialidad;
-	String despacho;
-	int telefono;
-	
+	private String especialidad;
+	private String despacho;
+
 	//Metodos set
 	public void setespecialidad(String especialidad) {
 		this.especialidad = especialidad;

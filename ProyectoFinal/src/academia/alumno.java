@@ -7,7 +7,7 @@ import academia.*;
 public class alumno extends usuario {
 	
 	private String dni;
-	private Date fecha_nacimiento;
+	private String fecha_nacimiento;
 	
 	
 	//Un array list que contiene las notas de un alumno
@@ -18,7 +18,7 @@ public class alumno extends usuario {
 		return this.dni;
 	}
 	
-	public Date getfecha() {
+	public String getfecha() {
 		return this.fecha_nacimiento;
 	}
 	
@@ -28,7 +28,7 @@ public class alumno extends usuario {
 		this.dni = dni;
 	}
 	
-	public void setfecha(Date fecha) {
+	public void setfecha(String fecha) {
 		this.fecha_nacimiento = fecha;
 	}
 

@@ -6,6 +6,7 @@ Create Table usuario
 	username VARCHAR(25) UNIQUE,
 	password VARCHAR(25),
 	tipo enum('alumno','profesor','administrador'),
+	enable INT(1),
 	KEY(id)
 );
 
@@ -64,7 +65,7 @@ Create Table evaluaciones
 	id_profesor INT(4),
 	nota INT,
 	KEY(id),
-	FOREIGN KEY (id_matricula) REFERENCES matricula(id),
+	FOREIGN KEY (id_matricula) REFERENCES matricula(id), ON DELETE CASCADE,
 	FOREIGN KEY (id_profesor) REFERENCES profesor(id)
 );
 

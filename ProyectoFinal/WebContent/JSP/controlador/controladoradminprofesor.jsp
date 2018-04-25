@@ -35,8 +35,8 @@
 	String nombre;
 	String apellido1;
 	String apellido2;
-	String fecha;
-	String dni;
+	String especialidad;
+	String despacho;
 	String telefono;
 
 	String check;
@@ -59,8 +59,8 @@
 		String getnombre = "nombre"+i;
 		String getapellido1 = "apellido1"+i;
 		String getapellido2 = "apellido2"+i;
-		String getfecha = "fecha"+i;
-		String getdni = "dni"+i;
+		String getespecialidad = "especialidad"+i;
+		String getdespacho = "despacho"+i;
 		String gettelefono = "telefono"+i;
 		
 	
@@ -76,7 +76,7 @@
 		if(check != null)
 		{
 		    //Generamos un conector de alumno
-			conector_alumno co = new conector_alumno();
+			conector_profesor co = new conector_profesor();
 		    
 			co.borrarFila(id);	
 		}
@@ -88,30 +88,30 @@
 			nombre = request.getParameter(getnombre);
 			apellido1 = request.getParameter(getapellido1);
 			apellido2 = request.getParameter(getapellido2);	
-			fecha= request.getParameter(getfecha);	
+			despacho= request.getParameter(getdespacho);	
 			telefono = request.getParameter(gettelefono);
-			dni = request.getParameter(getdni);
+			especialidad = request.getParameter(getespecialidad);
 			
 			//Creamos un alumno vacio
-			alumno aux = new alumno();
+			profesor aux = new profesor();
 			
 			aux.setid(id);
-			aux.setdni(dni);
+			aux.setespecialidad(especialidad);
 			aux.setusername(username);
 			aux.setpassword(password);
 			aux.setnombre(nombre);
 			aux.setapellido1(apellido1);
 			aux.setapellido2(apellido2);
-			aux.setfecha(fecha);
+			aux.setdespacho(despacho);
 
 			int auxtel = Integer.parseInt(telefono);
 			aux.settelefono(auxtel);
 			
 		    //Update filas
 		    //Generamos un conector de alumno
-			conector_alumno co = new conector_alumno();
+			conector_profesor co = new conector_profesor();
 		    
-			co.updatealumno(aux);   
+			co.updateprofesor(aux);   
 		}
 	}
 
@@ -123,24 +123,24 @@
 	nombre = request.getParameter("nombren");
 	apellido1 = request.getParameter("apellido1n");
 	apellido2 = request.getParameter("apellido2n");	
-	fecha= request.getParameter("fechan");	
+	despacho= request.getParameter("despachon");	
 	telefono = request.getParameter("telefonon");
-	dni = request.getParameter("dnin");
+	especialidad = request.getParameter("especialidadn");
 	
 	String n = "";
 	
-	if(! (dni.equals(n) && username.equals(n) && password.equals(n)))
+	if(! ( username.equals(n) && password.equals(n)))
 	{
 		//Creamos un alumno vacio
-		alumno aux = new alumno();
+		profesor aux = new profesor();
 	
-		aux.setdni(dni);
+		aux.setdespacho(despacho);
 		aux.setusername(username);
 		aux.setpassword(password);
 		aux.setnombre(nombre);
 		aux.setapellido1(apellido1);
 		aux.setapellido2(apellido2);
-		aux.setfecha(fecha);
+		aux.setespecialidad(especialidad);
 	
 		if(!telefono.equals(n))
 		{
@@ -154,13 +154,13 @@
 
 	    //Update filas
 	    //Generamos un conector de alumno
-		conector_alumno co = new conector_alumno();
+		conector_profesor co = new conector_profesor();
 			    
-		co.insertalumno(aux); 
+		co.insertaprofesor(aux); 
 	}
 	
 	
-	response.sendRedirect(url.vista+"adminalumnos.jsp");
+	response.sendRedirect(url.vista+"adminprofesores.jsp");
 
 
 %>

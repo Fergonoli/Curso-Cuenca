@@ -52,27 +52,21 @@
 
 <% 
 	//Crear un objeto conector usuario
-	conector_alumno co = new conector_alumno();
+	conector_asignatura co = new conector_asignatura();
 
 	//Creamos un arralist de alumnos para la devolucion
-	ArrayList<alumno> tabla = new ArrayList<alumno>();
+	ArrayList<asignatura> tabla = new ArrayList<asignatura>();
     
     //Hacerle la consulta al conector usuario para que te devuelva el expediente
 	tabla = co.devolverTodos();
 %>
 
-      <form method="get" action="<%=url.controlador %>controladoradminalumno.jsp" method="post">
+      <form method="get" action="<%=url.controlador %>controladoradminasignatura.jsp" method="post">
         <table border=1 cellpadding=5>
           <tr>
             <th>ID</th>
-            <th>Username</th>
-            <th>Password</th>
-            <th>Dni</th>
-            <th>Fecha de nacimiento</th>
             <th>Nombre</th>
-            <th>Apellido 1</th>
-            <th>Apellido 2</th>  
-            <th>Telefono</th> 
+			<th>Profesor</th>
             <th>¿Borrar fila?</th>         
           </tr>
           <!-- con el metodo getString("Nombre de atributo") sacas el valor de cada celda  -->           
@@ -83,28 +77,16 @@
             for(int i=0; i<tabla.size(); i++){ lentgh++; %>
             <tr>
             	<td><input type='text' name=<%="id"+i%> value=<%= tabla.get(i).getid() %> readonly></td>
-           		<td><input type='text' name=<%="username"+i%> value=<%= tabla.get(i).getusername() %>></td>
-            	<td><input type='text' name=<%="password"+i%> value=<%= tabla.get(i).getpassword() %>></td>
-            	<td><input type='text' name=<%="dni"+i%> value=<%= tabla.get(i).getdni() %>></td>
-            	<td><input type='text' name=<%="fecha"+i%> value=<%= tabla.get(i).getfecha() %>></td>
-            	<td><input type='text' name=<%="nombre"+i%> value=<%= tabla.get(i).getnombre() %>></td>
-               	<td><input type='text' name=<%="apellido1"+i%> value=<%= tabla.get(i).getapellido1() %>></td>
-            	<td><input type='text' name=<%="apellido2"+i%> value=<%= tabla.get(i).getapellido2() %>></td>
-            	<td><input type='text' name=<%="telefono"+i%> value=<%= tabla.get(i).gettelefono() %>></td>      	
+           		<td><input type='text' name=<%="nombre"+i%> value=<%= tabla.get(i).getnombre() %>></td>
+            	<td><input type='text' name=<%="idprofesor"+i%> value=<%= tabla.get(i).getidprofesor() %>></td>
             	<td><input type='checkbox' name=<%="delete"+i%>></td>
             	</tr>	
       <% }%>
 
             <tr>
             	<td><input type='text' name=<%="idn"%> placeholder="Añadir nuevo" readonly></td>
-           		<td><input type='text' name=<%="usernamen"%> placeholder="Añadir nuevo" ></td>
-            	<td><input type='text' name=<%="passwordn"%> placeholder="Añadir nuevo" ></td>
-            	<td><input type='text' name=<%="dnin"%> placeholder="Añadir nuevo" ></td>
-            	<td><input type='text' name=<%="fechan"%> placeholder="Añadir nuevo" ></td>
-            	<td><input type='text' name=<%="nombren"%> placeholder="Añadir nuevo" ></td>
-               	<td><input type='text' name=<%="apellido1n"%> placeholder="Añadir nuevo" ></td>
-            	<td><input type='text' name=<%="apellido2n"%> placeholder="Añadir nuevo" ></td>
-            	<td><input type='text' name=<%="telefonon"%> placeholder="Añadir nuevo" ></td>
+           		<td><input type='text' name=<%="nombren"%> placeholder="Añadir nuevo" ></td>
+            	<td><input type='text' name=<%="idprofesorn"%> placeholder="Añadir nuevo" ></td>
             </tr>	
 
           </tr>   
