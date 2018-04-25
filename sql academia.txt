@@ -294,3 +294,55 @@ WHERE al.dni = '7675434T' AND
 	   usu.id = prof.id_usuario AND 
 	   mat.id = eva.id_matricula AND 
 	   eva.id_profesor = prof.id
+
+
+
+
+
+
+INSERT INTO `evaluaciones`( `id_matricula`, `nota`, `id_profesor`) VALUES ((SELECT matricula.id 
+                                                                            FROM alumno, matricula, profesor, usuario, asignatura
+                                                                            WHERE alumno.dni = '45342345T' AND
+                                                                                  alumno.id = matricula.id_alumno AND
+                                                                                  usuario.username = 'Pepe' AND
+                                                                                  usuario.id = profesor.id_usuario AND
+                                                                                  asignatura.id_profesor = profesor.id AND
+                                                                                  asignatura.id = matricula.id_asignatura
+                                                                            
+                                                                       ),5,
+                                                                          (SELECT profesor.id 
+                                                                            FROM profesor, usuario
+                                                                            WHERE usuario.username = 'Pepe' AND
+                                                                                  usuario.id = profesor.id_usuario      
+                                                                       ))
+
+SELECT alu.id, alu.nombre, alu.apellido1, alu.apellido2, alu.dni, alu.fecha_nacimiento FROM usuario u, profesor prof, asignatura asi, matricula mat, alumno alu WHERE u.username='Pepe' AND u.id = prof.id_usuario AND prof.id = asi.id_profesor AND asi.id = mat.id_asignatura AND mat.id_alumno = alu.id AND YEAR(alu.fecha_nacimiento) BETWEEN ( YEAR(now() )- 18 ) AND YEAR (now())
+
+
+
+
+SELECT * FROM usuario, alumno , CASE alumno.fecha_nacimiento WHEN alumno.fecha_nacimiento = '0000-00-00' THEN null as fecha END  WHERE usuario.tipo='alumno' AND usuario.id = alumno.id_usuario
+
+
+
+
+SELECT u.password, u.username,
+       al.nombre, al.apellido1, al.apellido2, al.dni,
+       al.telefono, 
+       (CASE WHEN al.fecha_nacimiento = '0000-00-00' THEN null
+            ELSE al.fecha_nacimiento END) AS fecha
+FROM usuario u, alumno al
+WHERE u.tipo='alumno' AND u.id = al.id_usuario
+
+
+
+
+
+SELECT nombre, apellido1, apellido2, dni, telefono, (CASE WHEN fecha_nacimiento = '0000-00-00' THEN null ELSE fecha_nacimiento END) AS fecha 
+FROM alumno
+
+UNION
+
+SELECT u.username, u.password 
+FROM usuario u, alumno al
+WHERE usuario.tipo='alumno' AND usuario.id = alumno.id_usuario

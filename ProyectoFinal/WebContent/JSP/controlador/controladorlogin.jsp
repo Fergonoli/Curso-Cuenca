@@ -83,7 +83,7 @@
 				{
 					if(tipo.equals("administrador"))
 					{
-						response.sendRedirect(url.vista+"saludoAdministrador.jsp");
+						response.sendRedirect(url.vista+"inicioadministrador.jsp");
 					}
 				}
 			}          
@@ -93,7 +93,7 @@
 			//No darle acceso
 			JOptionPane.showMessageDialog(frame, "ACCESO DENEGADO ");
 			
-			response.sendRedirect(url.vista+"login.jsp");
+			response.sendRedirect(url.vista+"index.jsp");
 		}
 	}
 	

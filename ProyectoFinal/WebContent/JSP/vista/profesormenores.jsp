@@ -57,7 +57,7 @@
 	//Creamos un arralist de alumnos para la devolucion
 	ArrayList<alumno> res = new ArrayList<alumno>();
     
-	res = co.devolverCalificaciones(user);
+	res = co.devolverMenores(user);
 	
 
 %>
@@ -69,7 +69,7 @@
             <th>Apellido 1</th>
             <th>Apellido 2</th>
             <th>Dni</th>
-            <th>Nota</th>
+            <th>Fecha de nacimiento</th>
           </tr>
           <tr>
             
@@ -83,34 +83,16 @@
            		<td><input type='text' name=<%="nombre"+i%> value=<%= res.get(i).getnombre() %> disabled></td>
            		<td><input type='text' name=<%="apellido1"+i%> value=<%= res.get(i).getapellido1() %> disabled></td>
            		<td><input type='text' name=<%="apellido2"+i%> value=<%= res.get(i).getapellido2() %> disabled></td>
-           		<td><input type='text' name=<%="dni"+i%> value=<%= res.get(i).getdni() %> readonly></td>
+           		<td><input type='text' name=<%="dni"+i%> value=<%= res.get(i).getdni() %> disabled></td>
+           		<td><input type='date' name=<%="fecha"+i%> value=<%= res.get(i).getfecha()%> disabled></td>
+           		     
+            </tr>
            		
-           		<td><input type='text' name=<%="nota"+i%> value=<% if(res.get(i).notas.get(0).getnota()==0)
-           			   { %>
-           				<%="No_presentado"   %>
-           			 <%}
-           		       else
-           			   {%>
-           				<%=res.get(i).notas.get(0).getnota()%>        				
-           			 <%}%>
-           			></td>
-           			
-           			
-          </tr>
+           		<%} %>
 
-      <% }    
-      %>
-          </tr>
           
         </table>
-        
-        <br>
-        <br>
-        
-        <input type="number" name="length" id="lenght" value=<%= lentgh %> hidden>
-        
-        <input type="submit" id="modificar" value="Modificar">
-        
+
       </form>
 	
 

@@ -27,40 +27,40 @@
 
 
 
-<h1>Perfil de alumno</h1>
+<h1>Perfil de profesor</h1>
 
 <% 
 	//Crear un objeto conector usuario
-	conector_alumno co = new conector_alumno();
+	conector_profesor co = new conector_profesor();
 	
 	//Consultar la sesion para obtener el username del usuario
     HttpSession sesion = request.getSession();    
     String user = ""+sesion.getAttribute("username");
 
     //Hacerle la consulta al conector usuario para que te devuelva el perfil
-	alumno alum = co.devolverPerfil(user);
+	profesor prof = co.devolverPerfil(user);
 	
 %>
 
 
-<form action="<%=url.controlador%>controladoralumno.jsp" method="post">
+<form action="<%=url.controlador%>controladorprofesor.jsp" method="post">
 
-	Nombre <input type="text" name="nombre" id="nombre" value="<%=alum.getnombre()%>" required>
+	Nombre <input type="text" name="nombre" id="nombre" value="<%=prof.getnombre()%>" required>
 	<br>
 	
-	Apellido 1<input type="text" name="apellido1" id="apellido1" value="<%=alum.getapellido1()%>" required>
+	Apellido 1<input type="text" name="apellido1" id="apellido1" value="<%=prof.getapellido1()%>" required>
 	<br>
 
-	Apellido 2<input type="text" name="apellido2" id="apellido2" value="<%=alum.getapellido2()%>" required>
+	Apellido 2<input type="text" name="apellido2" id="apellido2" value="<%=prof.getapellido2()%>" required>
 	<br>
 	
-	Dni<input type="text" name="dni" id="dni" value="<%=alum.getdni()%>" required>
+	Despacho<input type="text" name="despacho" id="despacho" value="<%=prof.getdespacho()%>" required>
 	<br>
 	
-	Fecha de nacimiento<input type="date" name="fecha" id="fecha" value="<%=alum.getfecha()%>" required>
+	Especialidad<input type="text" name="especialidad" id="especialidad" value="<%=prof.getespecilidad()%>" required>
 	<br>
 	
-	Telefono <input type="number" name="telefono" id="telefono" value="<%=alum.gettelefono()%>" required>
+	Telefono <input type="number" name="telefono" id="telefono" value="<%=prof.gettelefono()%>" required>
 	<br>
 	<br>
 

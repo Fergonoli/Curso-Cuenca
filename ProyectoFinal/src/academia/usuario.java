@@ -3,6 +3,9 @@ package academia;
 
 public class usuario {
 	
+	//Id de usuario
+	private int id;
+	
 	//Atributos de usuario
 	private String username;
 	private String password;
@@ -16,6 +19,10 @@ public class usuario {
 	
 	
 	//Metodos get
+	public int getid() {
+		return this.id;
+	}
+	
 	public String getusername() {
 		return this.username;
 	}
@@ -46,6 +53,10 @@ public class usuario {
 	
 	
 	//Metodos set
+	public void setid(int i) {
+		this.id = i;
+	}
+	
 	public void setusername(String user) {
 		this.username = user;
 	}

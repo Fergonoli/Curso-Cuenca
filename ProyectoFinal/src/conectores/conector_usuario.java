@@ -77,7 +77,7 @@ public class conector_usuario {
 		ResultSet rset = stmt.executeQuery(sqlStr);		
 		
 		//Comprobar que se devolvio algo
-		if (!rset.first()) {
+		if (rset.first()) {
 			  
 			return true;		  
 		}	
@@ -105,8 +105,8 @@ public class conector_usuario {
 		      
 		//En una variable String almacenamos la instruccion SQL que queremos lanzar
 		String sqlStr = "UPDATE usuario SET "
-						+ "usuario.username="+newuser+""
-								+ "WHERE usuario.username ="+lastuser+"";
+						+ "usuario.username='"+newuser+"' "
+								+ "WHERE usuario.username = '"+lastuser+"' ";
 
 		// Se puede quitar
 		System.out.println("Query statement is " + sqlStr);
@@ -142,8 +142,8 @@ public class conector_usuario {
 		      
 		//En una variable String almacenamos la instruccion SQL que queremos lanzar
 		String sqlStr = "UPDATE usuario SET "
-						+ "usuario.password="+pass+""
-								+ "WHERE usuario.username ="+user+"";
+						+ "usuario.password='"+pass+"' "
+								+ "WHERE usuario.username = '"+user+"' ";
 
 		// Se puede quitar
 		System.out.println("Query statement is " + sqlStr);

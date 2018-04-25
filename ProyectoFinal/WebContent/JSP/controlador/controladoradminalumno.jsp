@@ -32,8 +32,19 @@
 
 	
 	//Variables para extraccion
+	int id;
+	
+	String username;
+	String password;
+	
+	String nombre;
+	String apellido1;
+	String apellido2;
+	Date fecha = new Date();
 	String dni;
-	String nota;
+	String telefono;
+
+	String check;
 	
 	
 	int len = Integer.parseInt(request.getParameter("length"));
@@ -42,44 +53,58 @@
 	//Mientras encuentres dnis, es porque hay filas en la tabla
 	for(int i=0; i<len; i++)
 	{
+		
+		String getid = "id"+i;
+		
+		String getusername = "username"+i;
+		String getpassword = "password"+i;
+		
+		String getnombre = "nombre"+i;
+		String getapellido1 = "apellido1"+i;
+		String getapellido2 = "apellido2"+i;
+		String getfecha = "fecha"+i;
 		String getdni = "dni"+i;
-		String getnota = "nota"+i;
+		String gettelefono = "telefono"+i;
+		
+		id = Integer.parseInt(request.getParameter(getid));
+		
+		//PAra comprobar si se borra o se modifica
+		String getcheck = "check"+i;
+		
+		check = request.getParameter(getusername);
+		
+		//Hacer el if de los check para decidir si se borra o se actualiza
 		
 		//Sacamos los datos de la fila i
+		username = request.getParameter(getusername);
+		password = request.getParameter(getpassword);
+		nombre = request.getParameter(getnombre);
+		apellido1 = request.getParameter(getapellido1);
+		apellido2 = request.getParameter(getapellido2);
+		
+		
+		fecha.parse(request.getParameter(getfecha));
+		
+		
+		telefono = request.getParameter(gettelefono);
 		dni = request.getParameter(getdni);
-		nota = request.getParameter(getnota);
 		
-		System.out.println("Usuario "+dni+"   nota"+nota);
+		//Creamos un alumno vacio
+		alumno aux = new alumno();
+			
+		aux.setdni(dni);
+		aux.setusername(username);
+		aux.setpassword(password);
+		aux.setnombre(nombre);
+		aux.setapellido1(apellido1);
+		aux.setapellido2(apellido2);
+		aux.setfecha(fecha);
+		aux.settelefono(Integer.parseInt(telefono));
 		
-		
-		if(nota.equals("No_presentado"))
-		{
-		    // No hacer nada porque no se quiere calificar ni modificar su calificacion, ni siquiera tendra inserccion en la
-		    // tabla evaluaciones
-		}
-		else
-		{
-			//Creamos un alumno vacio
-			alumno aux = new alumno();
-			
-			aux.setdni(dni);
-			
-			//Creamos un objeto alumno
-			evaluacion eva = new evaluacion();
-			
-			//Hacemos el casting para pasar la nota de string a int
-			int not = Integer.parseInt(nota);
-			
-	    	//Cargamos los datos de la evalucion de cada asignatura
-	    	eva.setnota(not);
-	    	
-	    	//Y las añadimos al arraylist de alumno
-	    	aux.notas.add(eva);	
-	    	
-	    	//Añadimos este alumno a el arraylist de solucion
-	    	recogido.add(aux);
-		}	
-		
+
+	    //Añadimos este alumno a el arraylist de solucion
+	    recogido.add(aux);
+
 	}
 	
 	//Consultar la sesion para obtener el username del usuario
