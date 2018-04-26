@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import academia.alumno;
-import academia.asignatura;
+import academia.matricula;
 
-public class conector_asignatura {
+public class conector_matricula {
 
 		
-	public ArrayList<asignatura> devolverTodos() throws SQLException, ClassNotFoundException{
+	public ArrayList<matricula> devolverTodos() throws SQLException, ClassNotFoundException{
 		
 		//Creamos un arralist de alumnos para la devolucion
-		ArrayList<asignatura> result = new ArrayList<asignatura>();
+		ArrayList<matricula> result = new ArrayList<matricula>();
 		
 		//Crear un objeto conector para obtener los datos de conexion
 		conector_manager con = new conector_manager();
@@ -36,9 +36,7 @@ public class conector_asignatura {
 		Statement stmt = conn.createStatement();		      
 		      
 		//En una variable String almacenamos la instruccion SQL que queremos lanzar
-		String sqlStr = "SELECT asi.id, asi.nombre as asignatura, prof.nombre as profesor "+
-				        "FROM profesor prof, asignatura asi " + 
-				        "WHERE asi.id_profesor = prof.id ";
+		String sqlStr = "SELECT mat.id, asi.id as idasignatura, alu.id as idalumno, asi.nombre as asignatura, alu.nombre as alumno FROM alumno alu, asignatura asi, matricula mat WHERE mat.id_alumno = alu.id AND mat.id_asignatura = asi.id ";
 		
 		// Se puede quitar
 		System.out.println("Query statement is " + sqlStr);
@@ -50,14 +48,20 @@ public class conector_asignatura {
 		while(rset.next()) {
 		
 			//creamos un objeto alumno donde volcar la informacion de la bbdd
-			asignatura aux = new asignatura();
+			matricula aux = new matricula();
 			
 			//Id del usuario
 			aux.setid(Integer.parseInt(rset.getString("id")));
 			
+			//Id foraneas
+			aux.setidasignatura(Integer.parseInt(rset.getString("idasignatura")));
+			aux.setidalumno(Integer.parseInt(rset.getString("idalumno")));
+						
+			
+			
 			//Recoger informacion del alumno
-			aux.setidprofesor(rset.getString("profesor"));
-			aux.setnombre(rset.getString("asignatura"));
+			aux.setnombrealumno(rset.getString("alumno"));
+			aux.setnombreasignatura(rset.getString("asignatura"));
 
 			result.add(aux);
 			
@@ -90,7 +94,7 @@ public class conector_asignatura {
 		Statement stmt = conn.createStatement();		      
 		      
 		//En una variable String almacenamos la instruccion SQL que queremos lanzar
-		String sqlStr = "DELETE FROM asignatura WHERE id='"+id+"' ";
+		String sqlStr = "DELETE FROM matricula WHERE id='"+id+"' ";
 		
 		// Se puede quitar
 		System.out.println("Query statement is " + sqlStr);
@@ -103,7 +107,7 @@ public class conector_asignatura {
 		conn.close();		
 	}
 	
-	public void updateasignatura(asignatura entrada) throws ClassNotFoundException, SQLException{
+	public void updatematricula(matricula entrada) throws ClassNotFoundException, SQLException{
 		
 		//Crear un objeto conector para obtener los datos de conexion
 		conector_manager con = new conector_manager();
@@ -122,10 +126,10 @@ public class conector_asignatura {
 		Statement stmt = conn.createStatement();		      
 		
 		//En una variable String almacenamos la instruccion SQL que queremos lanzar
-		String sqlStr = "UPDATE asignatura SET "
-			+ "asignatura.nombre='"+entrada.getnombre()+"',"
-			+ "asignatura.id_profesor= (SELECT profesor.id FROM profesor WHERE profesor.nombre ='"+entrada.getidprofesor()+"' )"
-		    + "WHERE asignatura.id = '"+entrada.getid()+"' ";
+		String sqlStr = "UPDATE matricula SET "
+			+ "matricula.id_alumno= '"+entrada.getidalumno()+"', "
+			+ "matricula.id_asignatura ='"+entrada.getidasignatura()+"' "
+		    + "WHERE matricula.id = '"+entrada.getid()+"' ";
 		
 		// Se puede quitar
 		System.out.println("Query statement is " + sqlStr);
@@ -138,7 +142,7 @@ public class conector_asignatura {
 		conn.close();
 	}
 		
-	public void insertaasignatura(asignatura entrada) throws ClassNotFoundException, SQLException{
+	public void insertamatricula(matricula entrada) throws ClassNotFoundException, SQLException{
 		
 		//Crear un objeto conector para obtener los datos de conexion
 		conector_manager con = new conector_manager();
@@ -157,9 +161,9 @@ public class conector_asignatura {
 		Statement stmt = conn.createStatement();		      
 		
 		//En una variable String almacenamos la instruccion SQL que queremos lanzar
-		String sqlStr = "INSERT INTO asignatura (nombre, idprofesor) VALUES ( "
-			+ "'"+entrada.getnombre()+"', "
-			+ "(SELECT profesor.nombre FROM profesor WHERE profesor.nombre ='"+entrada.getidprofesor()+"' ) ) ";
+		String sqlStr = "INSERT INTO matricula (id_alumno, id_asignatura) VALUES ( "		
+			+ "( SELECT id FROM alumno WHERE alumno.nombre ='"+entrada.getnombreasignatura()+"' ) , "		
+			+ "( SELECT id FROM asignatura WHERE asignatura.nombre = '"+entrada.getnombrealumno()+"' ) )";
 		
 		// Se puede quitar
 		System.out.println("Query statement is " + sqlStr);
@@ -173,3 +177,4 @@ public class conector_asignatura {
 	}
 	
 }
+

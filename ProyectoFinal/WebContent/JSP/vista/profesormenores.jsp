@@ -84,7 +84,7 @@
            		<td><input type='text' name=<%="apellido1"+i%> value=<%= res.get(i).getapellido1() %> disabled></td>
            		<td><input type='text' name=<%="apellido2"+i%> value=<%= res.get(i).getapellido2() %> disabled></td>
            		<td><input type='text' name=<%="dni"+i%> value=<%= res.get(i).getdni() %> disabled></td>
-           		<td><input type='date' name=<%="fecha"+i%> value=<%= res.get(i).getfecha()%> disabled></td>
+           		<td><input type='text' name=<%="fecha"+i%> value=<%= res.get(i).getfecha()%> disabled></td>
            		     
             </tr>
            		

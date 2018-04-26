@@ -123,7 +123,7 @@ public class conector_profesor {
 			{
 				//Hacer update
 				//En una variable String almacenamos la instruccion SQL que queremos lanzar
-				String sqlStr = "UPDATE `evaluaciones` SET `nota` = "+alumnos.get(i).notas.get(0).nota+" "+
+				String sqlStr = "UPDATE `evaluaciones` SET `nota` = "+alumnos.get(i).notas.get(0).getnota()+" "+
 					    "        WHERE evaluaciones.id_matricula = (SELECT matricula.id "+ 
 						"					                       FROM alumno, matricula, profesor, usuario, asignatura " + 
 						"						                   WHERE alumno.dni = '"+alumnos.get(i).getdni()+"' AND " + 
@@ -157,7 +157,7 @@ public class conector_profesor {
 						"                                                                                  usuario.id = profesor.id_usuario AND " + 
 						"                                                                                  asignatura.id_profesor = profesor.id AND " + 
 						"                                                                                  asignatura.id = matricula.id_asignatura )"+
-						"                                                                       , "+alumnos.get(i).notas.get(0).nota+", " + 
+						"                                                                       , "+alumnos.get(i).notas.get(0).getnota()+", " + 
 						"                                                                          (SELECT profesor.id  " + 
 						"                                                                            FROM profesor, usuario " + 
 						"                                                                            WHERE usuario.username = '"+user+"' AND " + 

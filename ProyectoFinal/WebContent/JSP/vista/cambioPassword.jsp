@@ -17,7 +17,7 @@
 <link rel="stylesheet" href=<%=url.css%>>
 </head>
 <body>
-
+<h1> Cambiar password </h1>
   <%@ page import = "conectores.*" %>
   <%@ page import = "academia.*" %>
 

@@ -17,7 +17,7 @@
 <link rel="stylesheet" href=<%=url.css%>>
 </head>
 <body>
-
+<h1> Cambiar username </h1>
   <%@ page import = "conectores.*" %>
   <%@ page import = "academia.*" %>
 

@@ -17,7 +17,7 @@
 <link rel="stylesheet" href=<%=url.css%>>
 </head>
 <body>
-<h1> Bienvenido a tu academia <%= session.getAttribute("username") %></h1>
+<h1> Bienvenido a tu academia PROFESOR <%= session.getAttribute("username") %></h1>
 
 	<!--  contenido debajo del header  -->
 	<nav>

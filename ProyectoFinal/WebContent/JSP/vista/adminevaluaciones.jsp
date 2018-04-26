@@ -52,10 +52,10 @@
 
 <% 
 	//Crear un objeto conector usuario
-	conector_asignatura co = new conector_asignatura();
+	conector_evaluacion co = new conector_evaluacion();
 
 	//Creamos un arralist de alumnos para la devolucion
-	ArrayList<asignatura> tabla = new ArrayList<asignatura>();
+	ArrayList<evaluacion> tabla = new ArrayList<evaluacion>();
     
     //Hacerle la consulta al conector usuario para que te devuelva el expediente
 	tabla = co.devolverTodos();
@@ -71,12 +71,14 @@
 	tablan = con.devolverTodos();
 %>
 
-      <form method="get" action="<%=url.controlador %>controladoradminasignatura.jsp" method="post">
+      <form method="get" action="<%=url.controlador %>controladoradminevaluaciones.jsp" method="post">
         <table border=1 cellpadding=5>
           <tr>
             <th>ID</th>
-            <th>Nombre</th>
-			<th>Profesor</th>
+            <th>IDMATRICULA</th>
+            <th>IDPROFESOR</th>
+            <th>Nota</th>
+            <th>Profesor</th>
             <th>¿Borrar fila?</th>         
           </tr>
           <!-- con el metodo getString("Nombre de atributo") sacas el valor de cada celda  -->           
@@ -87,16 +89,18 @@
             for(int i=0; i<tabla.size(); i++){ lentgh++; %>
             <tr>
             	<td><input type='text' name=<%="id"+i%> value=<%= tabla.get(i).getid() %> readonly></td>
-           		<td><input type='text' name=<%="nombre"+i%> value=<%= tabla.get(i).getnombre() %>></td>
-            	<td>
+            	<td><input type='text' name=<%="idmatricula"+i%> value=<%= tabla.get(i).getidmatricula() %> readonly></td>
+            	<td><input type='text' name=<%="idprofesor"+i%> value=<%= tabla.get(i).getidprofesor() %> readonly></td>
+           		<td><input type='text' name=<%="nota"+i%> value=<%= tabla.get(i).getnota() %>></td>
+           		            	<td>
 
-					<select type='text', name=<%="idprofesor"+i%>  >
+					<select type='text', name=<%="profesor"+i%>  >
 					
 					  <% for(int j=0; j<tablan.size();j++){ %>
 					  
 					  <option value=<%= tablan.get(j).getnombre() %>
 					  <%= tablan.get(j).getnombre() %> 
-					  <%if( tablan.get(j).getnombre().equals(tabla.get(i).getidprofesor())){
+					  <%if( tablan.get(j).getnombre().equals(tabla.get(i).getnombreprofesor())){
 						%> <%= "selected"%> 
 					  <%} 
 		  
@@ -107,22 +111,16 @@
 					</select>
             	
             	
-            	</td>
+            	</td>  	
             	<td><input type='checkbox' name=<%="delete"+i%>></td>
             	</tr>	
       <% }%>
 
             <tr>
             	<td><input type='text' name=<%="idn"%> placeholder="Añadir nuevo" readonly></td>
-           		<td><input type='text' name=<%="nombren"%> placeholder="Añadir nuevo" ></td>
-            	<td><select type='text', name=<%="idprofesorn"%>  >
-					  <option value="Añadir nuevo">
-					  <% for(int j=0; j<tablan.size();j++){ %>
-					  	<option value=<%= tablan.get(j).getnombre() %>> <%= tablan.get(j).getnombre() %> </option>
-
-					  <%} %>
-					  
-					</select></td>
+           		<td><input type='text' name=<%="idmatriculan"%> placeholder="Añadir nuevo" ></td>
+            	<td><input type='text' name=<%="notan"%> placeholder="Añadir nuevo" ></td>
+            	<td><input type='text' name=<%="profesorn"%> placeholder="Añadir nuevo" ></td>
             </tr>	
 
           </tr>   
